@@ -5,6 +5,13 @@ const Body = document.querySelector(".Body");
 
 const mainFrames = ["Home", "Community", "Email", "Share", "Settings", "Support", "Log Out"]
 
+const Body = document.querySelector(".Body");
+
+
+// Create Main Frames & Subframes
+
+const mainFrames = ["Home", "Community", "Email", "Share", "Settings", "Support", "Log Out"]
+
 const subFrames = ["Recent", "Adobe XD", "Figma", "Sketch", "Frames", "Icons", "Pallets", "Vectors"]
 
 
@@ -289,6 +296,17 @@ const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
 const Sections = document.querySelectorAll(".account-settings .fields section");
 
+
+if(window.innerHeight > Body.offsetHeight){
+
+Body.style.position = "relative";
+
+}else{
+
+Body.style.position = "absolute";
+Body.style.top = "0";
+
+}
 
 //Activate & Deactivate Side Navbar
 
