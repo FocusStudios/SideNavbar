@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Side Navbar Design - Glow Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:aqua;
+--secondary:#999FAD;
+--Background:#001835;
+--background:rgba(255,255,255,0.2);}
+
+body {
+margin:0;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+* {
+margin:0;
+padding:0;
+transition:0.5s;
+user-select:none;
+font-weight:650;
+font-style:normal;
+box-sizing:border-box;
+font-family:"Prompt", serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--Background);}
+
+.slide {
+position:absolute;
+top:500px;
+height:70vh;
+width:80vw;
+opacity:20%;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:rgba(0,0,0,0.3);
+background-color:#fff;
+box-shadow:1px 4.5px 12px currentcolor;}
+
+.content {
+position:relative;
+width:100%;
+height:2000px;
+overflow:hidden;
+display:none;
+align-items:center;
+justify-content:center;}
+
+.frame, .account-settings {
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+display:none;
+align-items:center;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.account-settings {
+display:flex;
+left:100vw;
+z-index:3;
+background:var(--Background);}
+
+.account-settings.active {
+left:0;}
+
+.Header {
+position:absolute;
+top:0;
+width:100%;
+height:55px;}
+
+.S.active {
+display:none;}
+
+.back {
+position:absolute;
+top:10px;
+left:10px;
+border-radius:9px;
+cursor:pointer;
+stroke:#fff;
+background:rgba(255,255,255,0.1);
+box-shadow:1px 4.5px 12px rgba(0,0,0,0.1);}
+
+.side-navbar {
+position:absolute;
+width:50px;
+height:670px;
+z-index:2;
+display:flex;
+align-items:center;
+justify-content:center;
+transform:scale(1.2);
+border-radius:8px;
+background:var(--Background);
+box-shadow:0 0 5px rgba(51,255,255,0.4);}
+
+.side-navbar.active {
+width:220px;}
+
+.dots {
+position:absolute;
+top:0;
+left:0;
+width:21px;
+height:5px;
+margin:6px;
+display:flex;
+gap:3px;
+list-style:none;}
+
+.dot {
+position:relative;
+width:5px;
+height:5px;}
+
+.dot1, .dot2 {
+position:absolute;
+width:5px;
+height:5px;
+border-radius:50%;
+background:var(--dot);}
+
+.dot2 {
+filter:blur(3px);
+transform:scale(1.1);}
+
+.item-list {
+position:absolute;
+left:0;
+top:30px;
+width:220px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;
+pointer-events:none;}
+
+.item {
+position:relative;
+width:220px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.item-btn {
+position:absolute;
+left:0;
+top:0;
+width:50px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+cursor:pointer;}
+
+.item-container {
+position:absolute;
+left:0;
+width:40px;
+height:100%;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.side-navbar.active .item-btn {
+width:220px;}
+
+.side-navbar.active .item-container {
+width:210px;}
+
+.item-btn.active {
+cursor:default;}
+
+.item.menu .item-btn.active {
+cursor:pointer;
+pointer-events:auto;}
+
+.text {
+position:absolute;
+left:40px;
+padding:3px 7px;
+border-radius:5px;
+display:none;
+align-items:center;
+justify-content:center;
+white-space:nowrap;
+font-size:0.5rem;
+color:var(--secondary);
+background:var(--Background);
+box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+
+.item .icon, .item .arrow {
+position:absolute;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.item .icon {
+left:10px;}
+
+.item .arrow {
+left:180px;}
+
+.item-btn .icon, .item-btn .arrow {
+fill:var(--secondary);}
+
+.item-btn.active .arrow {
+transform:rotate(180deg);}
+
+.item .Text, .menu-item span, .account-settings .fields li section span {
+position:absolute;
+font-size:0.6rem;
+color:var(--secondary);}
+
+.item .Text, .menu-item span {
+left:45px;
+width:120px;}
+
+.indicator {
+position:absolute;
+left:0;
+width:6.5px;
+height:26px;
+opacity:0;
+border-radius:0 6px 6px 0;
+background:var(--primary);
+box-shadow:0 0 5px var(--primary);}
+
+.item-btn.active .icon, .item-btn.active .Text, .item-btn.active .arrow, .item-btn.active .text, .menu-item.active span {
+color:var(--primary);
+fill:var(--primary);}
+
+.item-btn.active .icon, .item-btn.active .Text, .item-btn.active .arrow, .menu-item.active span {
+filter:drop-shadow(0 0 3px var(--primary));}
+
+.item-btn.active .text {
+text-shadow:0 0 3px var(--primary);}
+
+.item-btn.active .indicator {
+opacity:1;}
+
+.menu-item span {
+left:10px;
+font-size:0.55rem;}
+
+.menu-item.active {
+background:rgba(51,255,255,0.1);
+box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+
+.item.menu.active {
+height:174px;}
+
+.menu-container {
+position:absolute;
+top:30px;
+left:0;
+width:50px;
+height:0;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;}
+
+.side-navbar.active .menu-container {
+width:220px;}
+
+.item.menu.active .menu-container {
+height:144px;}
+
+.menu-content {
+position:absolute;
+top:6px;
+left:0;
+width:220px;
+height:138px;
+display:flex;
+align-items:center;
+justify-content:start;}
+
+.menu-list {
+position:absolute;
+top:0;
+left:24.5px;
+width:14.5px;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;}
+
+.side-navbar.active .menu-list {
+width:185.5px;}
+
+.menu-list-item {
+position:relative;
+width:100%;
+height:30px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.menu-item {
+position:relative;
+margin-left:10px;
+width:calc(100% - 10px);
+height:100%;
+border-radius:7px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.menu-item-container {
+position:absolute;
+left:0;
+width:calc(100% - 5px);
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.menu-list .line {
+position:absolute;
+top:0;
+left:0.25px;
+width:0.5px;
+height:122px;
+background:var(--secondary);}
+
+footer {
+position:absolute;
+left:10px;
+bottom:90px;
+width:200px;
+height:102px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+pointer-events:none;}
+
+footer .line {
+position:absolute;
+top:-6px;
+left:0;
+width:30px;
+height:0.5px;
+opacity:0.5;
+background:var(--secondary);}
+
+.side-navbar.active footer .line {
+width:200px;}
+
+.account {
+position:absolute;
+bottom:10px;
+width:40px;
+height:70px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+background:rgba(255,255,255,0.05);
+outline:0.1px solid rgba(255,255,255,0.1);
+box-shadow:0 2px 4px rgba(51,255,255,0.1);}
+
+.info-container {
+position:absolute;
+width:35px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.account .container {
+position:absolute;
+left:2.5px;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account .settings {
+position:absolute;
+top:0;
+left:170px;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;}
+
+.account .settings .circle {
+position:absolute;
+width:25px;
+height:25px;
+border-radius:50%;
+opacity:0;
+transform:scale(0.5);
+background:rgba(255,255,255,0.1);}
+
+.account .settings .circle.active {
+animation:Circle 0.6s;}
+
+@keyframes Circle {
+0%{opacity:0;transform:scale(0.5);}
+50%{opacity:1;transform:scale(1);}
+100%{opacity:0;transform:scale(0.5);}}
+
+.account .container img {
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;
+pointer-events:none;}
+
+.account .container .Active {
+position:absolute;
+bottom:0;
+right:0;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#4abf02;}
+
+.side-navbar.active .info-container {
+width:180px;}
+
+.account .account-info {
+position:absolute;
+left:45px;
+width:140px;
+height:90%;
+overflow:hidden;}
+
+.account .account-info h3, .account .account-info span {
+position:absolute;
+max-width:95%;
+font-size:0.7rem;
+font-weight:700;
+color:#fff;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;}
+
+.account .account-info h3 {
+top:0;
+font-size:0.7rem;
+font-weight:700;}
+
+.account .account-info span {
+bottom:0;
+font-size:0.5rem;
+font-weight:300;}
+
+.side-navbar.active .account {
+width:200px;}
+
+.logo .icon {
+position:absolute;
+left:10px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.logo .Text {
+position:absolute;
+left:50px;
+width:150px;
+color:#fff;
+font-size:0.8rem;
+font-weight:600;}
+
+.search {
+margin:5px 0;}
+
+.search img {
+position:absolute;
+left:10px;}
+
+.input::placeholder {
+position:absolute;
+top:50%;
+font-weight:400;
+font-size:0.6rem;
+transform:translateY(-50%);
+color:rgba(255,255,255,0.7);}
+
+.input:focus::placeholder {
+color:transparent;}
+
+.side-navbar .input {
+position:absolute;
+left:10px;
+width:30px;
+height:100%;
+cursor:pointer;
+pointer-events:auto;
+color:#fff;
+caret-color:#fff;
+border:none;
+font-weight:400;
+font-size:0.6rem;
+border-radius:7px;
+padding-left:30px;
+background:rgba(255,255,255,0.05);
+outline:1px solid rgba(255,255,255,0.2);}
+
+.Arrow {
+position:absolute;
+top:10px;
+left:38px;
+height:25px;
+width:25px;
+cursor:pointer;
+pointer-events:auto;
+border-radius:12.5px;
+background:var(--Background);
+box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+
+.Arrow svg {
+fill:var(--primary);}
+
+.side-navbar.active .input {
+width:200px;}
+
+.side-navbar.active .Arrow {
+left:206px;
+transform:rotate(180deg);}
+
+.Menu {
+position:absolute;
+left:10px;
+top:42px;
+width:200px;
+height:152px;
+z-index:1;
+opacity:0;
+border-radius:13px;
+display:flex;
+align-items:center;
+justify-content:end;
+pointer-events:none;
+transition:0.3s ease-out;
+background:var(--Background);
+box-shadow:0 1px 4px rgba(51,255,255,0.3);}
+
+.Menu.active {
+top:36px;
+opacity:1;
+pointer-events:auto;}
+
+.Menu .menu-content {
+width:200px;
+justify-content:center;}
+
+.Menu .menu-list {
+left:14.5px;
+width:179.5px;}
+
+.account-settings .content {
+position:absolute;
+top:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .content-container {
+position:relative;
+width:100%;
+height:670px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.account-settings .container {
+position:absolute;
+top:50px;
+width:120px;
+height:120px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .container img {
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;}
+
+.account-settings .camera {
+position:absolute;
+bottom:-12px;
+right:-3px;
+width:55px;
+height:55px;
+border-radius:50%;
+transition:0.3s;
+cursor:pointer;
+pointer-events:auto;
+fill:var(--Background);
+background:var(--primary);
+box-shadow:0 2px 8px rgba(51, 255, 255,0.4);}
+
+.camera:active, .account-settings .save:active {
+transform:scale(0.8);}
+
+.account-settings .fields {
+position:absolute;
+top:250px;
+width:300px;
+list-style:none;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:40px;}
+
+.account-settings .fields li {
+position:relative;
+width:100%;
+height:55px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li section {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li section input {
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+height:35px;
+padding-left:0;
+padding-right:40px;
+opacity:0;
+border:none;
+background:none;
+font-size:0.65rem;
+font-weight:400;
+color:transparent;
+pointer-events:auto;
+transition:all 0.5s, opacity 0s;}
+
+.account-settings .fields li section .Line, .account-settings .fields li section .line {
+position:absolute;
+bottom:0;
+width:100%;
+height:1.5px;
+display:flex;
+border-radius:1px;
+background:var(--secondary);}
+
+.account-settings .fields li section.active .Line {
+display:none;}
+
+.account-settings .fields li section .line {
+width:1px;
+opacity:0;
+display:flex;
+transition:width 0.5s;
+background:var(--primary);
+box-shadow:0 0 3px var(--primary);}
+
+.account-settings .fields li section.active .line {
+width:100%;
+opacity:1;}
+
+.account-settings .fields li section svg {
+position:absolute;
+right:0;
+fill:var(--secondary);
+pointer-events:none;}
+
+.account-settings .fields li section.active svg {
+fill:var(--primary);
+filter:drop-shadow(0 0 3px var(--primary));}
+
+.account-settings .fields li section span {
+left:0;
+bottom:10px;
+font-size:0.8rem;
+transition:0.3s;
+color:var(--secondary);}
+
+.account-settings .fields li section.active span {
+bottom:30px;
+opacity:1;
+font-size:0.6rem;
+color:var(--primary);
+text-shadow:0 0 3px var(--primary);}
+
+.account-settings .fields li section input:focus {
+opacity:1;
+outline:none;
+color:var(--primary);}
+
+.account-settings .Header {
+position:absolute;}
+
+.account-settings .save {
+position:absolute;
+bottom:30px;
+padding:10px 25px;
+border-radius:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+border:none;
+opacity:0.5;
+cursor:pointer;
+pointer-events:none;
+font-size:0.8rem;
+color:var(--primary);
+background:rgba(51,255,255,0.1);
+text-shadow:0 0 3px var(--primary);
+box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+
+.save.active {
+opacity:1;
+pointer-events:auto;}
+
+.save.active:hover {
+color:var(--text);
+background:var(--primary);
+box-shadow:0 3px 3px rgba(51, 255, 255,0.2);}
+
+</style>
+
+<body>
+
+<div class="Body">
+
+<!-- Account Settings -->
+
+<div class="account-settings">
+
+<div class="content">
+
+<header class="Header">
+  <svg class="back Back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</header>
+
+<div class="content-container">
+
+<section class="container">
+
+ <img class="profile" src="Media/Daniel.png">
+
+ <svg class="camera" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24.2041 16.5869C26.3996 16.471 28.6004 16.471 30.7959 16.5869H30.8008C31.371 16.6204 31.9275 16.7886 32.4229 17.0801C32.9164 17.3706 33.3361 17.7769 33.6445 18.2676L34.6641 19.8721L34.7871 20.041C34.9191 20.204 35.0791 20.3478 35.2627 20.4639C35.4463 20.58 35.6493 20.6662 35.8633 20.7188L36.0811 20.7598L36.085 20.7608C36.562 20.8275 37.0383 20.8998 37.5137 20.9776C39.236 21.2593 40.5 22.7643 40.5 24.5362V34.8311C40.5 35.8212 40.0994 36.76 39.4043 37.4434C38.711 38.125 37.7805 38.4989 36.8203 38.4991H18.1797C17.2194 38.499 16.289 38.125 15.5957 37.4434C14.9006 36.76 14.5 35.8212 14.5 34.8311V24.5362C14.5 22.7647 15.7623 21.2592 17.4863 20.9776C17.9619 20.8995 18.4365 20.8277 18.915 20.7608L18.9199 20.7598C19.2139 20.7203 19.4934 20.6187 19.7383 20.4639C19.9832 20.3091 20.1866 20.106 20.3369 19.8721L21.3545 18.2686C21.663 17.7774 22.0832 17.3708 22.5771 17.0801C23.0725 16.7886 23.6289 16.6204 24.1992 16.5869H24.2041ZM27.5 22.1201C26.1279 22.1202 24.812 22.6872 23.8418 23.6963C22.8715 24.7055 22.3262 26.0739 22.3262 27.501C22.3262 28.9282 22.8715 30.2965 23.8418 31.3057C24.812 32.3148 26.1278 32.8818 27.5 32.8819C28.8723 32.8819 30.1888 32.3148 31.1592 31.3057C32.1292 30.2966 32.6738 28.928 32.6738 27.501C32.6738 26.0741 32.1293 24.7054 31.1592 23.6963C30.1888 22.6872 28.8723 22.1201 27.5 22.1201Z"/>
+ </svg>
+
+</section>
+
+<!-- Fields -->
+
+<ul class="fields"></ul>
+
+<button class="save">Save</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+<!-- Dots -->
+
+<ul class="dots">
+
+<li class="dot" style="--dot:#FE000F;">
+ <div class="dot1"></div>
+ <div class="dot2"></div>
+</li>
+
+<li class="dot" style="--dot:#FED500;">
+ <div class="dot1"></div>
+ <div class="dot2"></div>
+</li>
+
+<li class="dot" style="--dot:#00FE56;">
+ <div class="dot1"></div>
+ <div class="dot2"></div>
+</li>
+
+</ul>
+
+<!-- Items -->
+
+<ul class="item-list">
+
+<!-- Logo -->
+
+<li class="item logo">
+ <section class="item-container">
+  <img class="icon" src="Icons/InfiniteDesign.svg">
+  <span class="Text">Infinite Design</span>
+ </section>
+</li>
+
+<!-- Search -->
+
+<li class="item search">
+ <input class="input" placeholder="Search">
+ <img src="Icons/search.svg">
+</li>
+
+</ul>
+
+<!-- Footer -->
+
+<footer>
+
+<div class="line"></div>
+
+</footer>
+
+<!-- Account info -->
+
+<section class="account">
+
+ <div class="info-container">
+
+  <section class="container">
+   <img class="profile">
+   <div class="Active"></div>
+  </section>
+
+  <section class="account-info">
+   <h3></h3>
+   <span></span>
+  </section>
+
+ </div>
+
+ <div class="settings">
+  <div class="circle"></div>
+  <img src="Icons/settings.svg">
+ </div>
+
+</section>
+
+<div class="Arrow">
+ <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.8984 8.50003C12.1023 8.4984 12.3006 8.56474 12.4609 8.68851L12.5273 8.74515L12.5312 8.74905L15.7324 11.8662C15.9022 12.0314 15.999 12.2578 15.999 12.4951C15.999 12.7325 15.9019 12.9579 15.7324 13.1231L12.5312 16.2412C12.362 16.4059 12.134 16.4971 11.8984 16.4971C11.6632 16.497 11.4358 16.4058 11.2666 16.2412C11.097 16.076 11 15.8497 11 15.6123C11.0001 15.3751 11.097 15.1496 11.2666 14.9844L13.8213 12.4942L11.2666 10.0059L11.2617 10.002C11.0969 9.83586 11.0047 9.61081 11.0068 9.37601C11.009 9.14148 11.1053 8.91895 11.2725 8.75589H11.2734C11.4408 8.59299 11.6654 8.502 11.8984 8.50003Z"/>
+ </svg>
+</div>
+
+</div>
+
+</div>
+
+<input type="file" id="CameraInput" accept="image/*" style="display:none;"/>
+
+<script src="JS/SideGlow.js"></script>
+
+</body>
+
+</html>
