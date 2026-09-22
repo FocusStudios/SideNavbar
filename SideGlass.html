@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Hamburger Menu Design - Glass Morphism Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:#fff;}
+
+body {
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+* {
+margin:0;
+padding:0;
+transition:0.4s;
+user-select:none;
+box-sizing:border-box;
+font-optical-sizing:auto;
+font-family:"Montserrat", sans-serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+direction:rtl;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow-x:hidden;
+overflow-y:auto;
+background-size:cover;
+background-image:url("Media/Wallpaper.png");}
+
+.slide {
+position:absolute;
+top:500px;
+width:95%;
+height:70vh;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);}
+
+.slide h1 {
+color:rgba(255,255,255,0.3);}
+
+.content {
+position:absolute;
+width:100%;
+height:2000px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.frame {
+position:fixed;
+width:calc(100% - 70px);
+height:100%;
+right:0;
+z-index:-1;
+overflow-x:hidden;
+overflow-y:auto;
+display:none;
+direction:ltr;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.account-settings, .Search {
+position:fixed;
+width:100%;
+height:100%;
+z-index:3;
+display:flex;
+left:100vw;
+overflow-x:hidden;
+overflow-y:auto;
+direction:ltr;
+justify-content:center;
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.1);}
+
+.account-settings.active, .Search.active {
+left:0;
+width:100%;}
+
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
+width:10px;}
+
+.frame::-webkit-scrollbar-thumb, .account-settings::-webkit-scrollbar-thumb {
+border-radius:5px;
+background:rgba(255,255,255,0.1);}
+
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+display:none;}
+
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
+display:flex;}
+
+.Header {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:55px;
+z-index:1;
+pointer-events:none;}
+
+.account-settings .Header {
+position:absolute;}
+
+.back {
+position:relative;
+border-radius:9px;
+stroke:var(--primary);
+stroke-width:2;
+cursor:pointer;
+pointer-events:auto;
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);
+background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
+
+.account-settings .back {
+position:absolute;
+top:10px;
+left:10px;}
+
+.side-navbar {
+position:absolute;
+top:1px;
+left:0;
+width:70px;
+z-index:2;
+direction:ltr;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:30px;
+border-radius:0 10px 10px 0;
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:2px 0 8px rgba(255,255,255,0.1);}
+
+.item-list {
+position:relative;
+width:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:30px;
+list-style:none;
+pointer-events:none;}
+
+.item {
+position:relative;
+width:40px;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.item .icon {
+position:absolute;
+top:0;
+width:40px;
+height:40px;
+opacity:0.5;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+cursor:pointer;}
+
+.item.active .icon {
+pointer-events:none;}
+
+.item .square {
+position:absolute;
+top:0;
+opacity:0;
+pointer-events:none;
+filter:drop-shadow(0 5px 5px rgba(0,0,0,0.8));}
+
+.item.active .icon, .item.active .square, .item.active .Text {
+opacity:1;}
+
+.icon svg {
+fill:var(--primary);}
+
+.item .Text, .account-settings .fields li section span {
+position:absolute;
+opacity:0.5;
+font-size:0.5rem;
+color:var(--primary);}
+
+.item .Text {
+bottom:0;}
+
+.account-settings .fields li section span {
+top:0;
+left:5px;}
+
+.account {
+position:relative;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.glass {
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+cursor:pointer;
+background:linear-gradient(to bottom right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 75%);}
+
+.account img, .account-settings img {
+position:absolute;
+width:95%;
+height:95%;
+border-radius:50%;
+object-fit:cover;}
+
+.account .Active {
+position:absolute;
+bottom:2px;
+right:2px;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#4abf02;}
+
+.side-navbar .search {
+position:relative;
+width:40px;
+height:40px;
+border-radius:10px;
+cursor:pointer;
+pointer-events:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.03);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:0 2px 4px rgba(255,255,255,0.1);}
+
+.search svg {
+position:absolute;
+pointer-events:none;
+stroke-width:2;
+stroke:rgba(255,255,255,0.5);}
+
+.Search .Header {
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;}
+
+.Search .search {
+position:relative;
+width:calc(100% - 65px);
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.Search .search svg {
+position:absolute;
+left:2.5px;
+pointer-events:none;
+stroke-width:2;
+stroke:rgba(255,255,255,0.5);}
+
+.input::placeholder {
+position:absolute;
+top:50%;
+font-weight:400;
+font-size:0.6rem;
+transform:translateY(-50%);
+color:rgba(255,255,255,0.7);}
+
+.input:focus::placeholder {
+color:transparent;}
+
+.input {
+position:absolute;
+width:100%;
+height:100%;
+font-weight:400;
+font-size:0.6rem;
+border:none;
+border-radius:10px;
+padding-left:35px;
+caret-color:#fff;
+pointer-events:auto;
+background:var(--background);
+color:rgba(255,255,255,0.5);
+outline:1px solid rgba(255,255,255,0.2);}
+
+.input:focus {
+color:rgba(255,255,255,1);
+outline:1px solid rgba(255,255,255,0.5);}
+
+.account-settings .content {
+position:absolute;
+top:0;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .content-container {
+position:relative;
+width:100%;
+height:670px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.account-settings .container {
+position:absolute;
+top:50px;
+width:120px;
+height:120px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .container img {
+width:97%;
+height:97%;}
+
+.account-settings .camera {
+position:absolute;
+bottom:-12px;
+right:-3px;
+width:55px;
+height:55px;
+border-radius:50%;
+cursor:pointer;
+pointer-events:auto;
+fill:#0B1A9B;
+transition:0.3s;
+background:var(--primary);
+box-shadow:-3px 3px 5px rgba(0,0,0,0.1);}
+
+.account:active, .camera:active, .account-settings .save:active {
+transform:scale(0.8);}
+
+.account-settings .fields {
+position:absolute;
+top:250px;
+list-style:none;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:20px;}
+
+.account-settings .fields li {
+position:relative;
+width:100%;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li section {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.account-settings .fields li:first-child section:nth-child(1), .account-settings .fields li:last-child section:nth-child(1) {
+left:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li:first-child section:nth-child(2), .account-settings .fields li:last-child section:nth-child(2) {
+right:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li section input {
+position:absolute;
+bottom:0;
+width:100%;
+height:40px;
+padding:0 10px;}
+
+.account-settings .fields span.active {
+opacity:1;}
+
+.account-settings .save {
+position:absolute;
+bottom:30px;
+padding:12px 25px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+opacity:0;
+font-size:0.8rem;
+border:none;
+cursor:pointer;
+pointer-events:none;
+color:rgba(255,255,255,1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);
+background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
+
+.save.active {
+opacity:1;
+pointer-events:auto;}
+
+@media screen and (max-width:400px) {
+
+.account-settings .fields {
+width:90%;}
+
+}
+
+@media screen and (min-width:400px) {
+
+.account-settings .fields {
+width:360px;}
+
+}
+
+@media screen and (max-height:670px) {
+
+.account-settings .content {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.account-settings .content {
+height:100%;}
+
+}
+
+@media screen and (max-height:690px) {
+
+.side-navbar {
+height:688px;}
+
+.account-settings .content {
+height:700px;}
+
+}
+
+@media screen and (min-height:690px) {
+
+.side-navbar {
+height:calc(100% - 2px);}
+
+.account-settings .content {
+height:100%;}
+
+}
+
+</style>
+
+<body>
+
+<div class="Body mouse">
+
+<!-- Search -->
+
+<div class="Search">
+
+ <header class="Header">
+
+  <svg class="back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+
+  <div class="search">
+
+   <input class="input" placeholder="Search">
+
+   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 22L18.6221 18.6221M18.6221 18.6221C19.1999 18.0444 19.6583 17.3584 19.971 16.6035C20.2837 15.8486 20.4446 15.0394 20.4446 14.2223C20.4446 13.4052 20.2837 12.5961 19.971 11.8411C19.6583 11.0862 19.1999 10.4003 18.6221 9.82247C18.0444 9.24468 17.3584 8.78635 16.6035 8.47365C15.8486 8.16094 15.0394 8 14.2223 8C13.4052 8 12.5961 8.16094 11.8411 8.47365C11.0862 8.78635 10.4003 9.24468 9.82247 9.82247C8.65556 10.9894 8 12.5721 8 14.2223C8 15.8726 8.65556 17.4552 9.82247 18.6221C10.9894 19.7891 12.5721 20.4446 14.2223 20.4446C15.8726 20.4446 17.4552 19.7891 18.6221 18.6221Z" stroke-linecap="round" stroke-linejoin="round"/>
+   </svg>
+
+  </div>
+
+ </header>
+
+</div>
+
+
+<!-- Account Settings -->
+
+<div class="account-settings">
+
+<div class="content">
+
+<header class="Header">
+  <svg class="back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</header>
+
+<div class="content-container">
+
+<section class="container">
+
+ <div class="glass">
+
+ <img class="profile" src="Media/Amanda.jpg">
+
+ <svg class="camera" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24.2041 16.5869C26.3996 16.471 28.6004 16.471 30.7959 16.5869H30.8008C31.371 16.6204 31.9275 16.7886 32.4229 17.0801C32.9164 17.3706 33.3361 17.7769 33.6445 18.2676L34.6641 19.8721L34.7871 20.041C34.9191 20.204 35.0791 20.3478 35.2627 20.4639C35.4463 20.58 35.6493 20.6662 35.8633 20.7188L36.0811 20.7598L36.085 20.7608C36.562 20.8275 37.0383 20.8998 37.5137 20.9776C39.236 21.2593 40.5 22.7643 40.5 24.5362V34.8311C40.5 35.8212 40.0994 36.76 39.4043 37.4434C38.711 38.125 37.7805 38.4989 36.8203 38.4991H18.1797C17.2194 38.499 16.289 38.125 15.5957 37.4434C14.9006 36.76 14.5 35.8212 14.5 34.8311V24.5362C14.5 22.7647 15.7623 21.2592 17.4863 20.9776C17.9619 20.8995 18.4365 20.8277 18.915 20.7608L18.9199 20.7598C19.2139 20.7203 19.4934 20.6187 19.7383 20.4639C19.9832 20.3091 20.1866 20.106 20.3369 19.8721L21.3545 18.2686C21.663 17.7774 22.0832 17.3708 22.5771 17.0801C23.0725 16.7886 23.6289 16.6204 24.1992 16.5869H24.2041ZM27.5 22.1201C26.1279 22.1202 24.812 22.6872 23.8418 23.6963C22.8715 24.7055 22.3262 26.0739 22.3262 27.501C22.3262 28.9282 22.8715 30.2965 23.8418 31.3057C24.812 32.3148 26.1278 32.8818 27.5 32.8819C28.8723 32.8819 30.1888 32.3148 31.1592 31.3057C32.1292 30.2966 32.6738 28.928 32.6738 27.501C32.6738 26.0741 32.1293 24.7054 31.1592 23.6963C30.1888 22.6872 28.8723 22.1201 27.5 22.1201Z"/>
+ </svg>
+
+ </div>
+
+</section>
+
+<!-- Fields -->
+
+<ul class="fields">
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+<li><section></section></li>
+
+<li><section></section></li>
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+</ul>
+
+<button class="save">Save</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+<div class="search">
+
+ <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 22L18.6221 18.6221M18.6221 18.6221C19.1999 18.0444 19.6583 17.3584 19.971 16.6035C20.2837 15.8486 20.4446 15.0394 20.4446 14.2223C20.4446 13.4052 20.2837 12.5961 19.971 11.8411C19.6583 11.0862 19.1999 10.4003 18.6221 9.82247C18.0444 9.24468 17.3584 8.78635 16.6035 8.47365C15.8486 8.16094 15.0394 8 14.2223 8C13.4052 8 12.5961 8.16094 11.8411 8.47365C11.0862 8.78635 10.4003 9.24468 9.82247 9.82247C8.65556 10.9894 8 12.5721 8 14.2223C8 15.8726 8.65556 17.4552 9.82247 18.6221C10.9894 19.7891 12.5721 20.4446 14.2223 20.4446C15.8726 20.4446 17.4552 19.7891 18.6221 18.6221Z" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
+
+</div>
+
+
+<ul class="item-list"></ul>
+
+
+<!-- Account info -->
+
+<section class="account">
+
+  <div class="glass">
+    <img class="profile">
+    <div class="Active"></div>
+  </div>
+
+</section>
+
+</div>
+
+</div>
+
+<input type="file" id="CameraInput" accept="image/*" style="display:none;"/>
+
+<script src="JS/SideGlass.js"></script>
+
+</body>
+
+</html>

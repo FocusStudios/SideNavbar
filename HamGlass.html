@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Hamburger Menu Design - Glass Morphism Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:#fff;}
+
+body {
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+* {
+margin:0;
+padding:0;
+transition:0.4s;
+user-select:none;
+box-sizing:border-box;
+font-optical-sizing:auto;
+font-family:"Montserrat", sans-serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+direction:rtl;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow-x:hidden;
+overflow-y:hidden;
+background-size:cover;
+background-image:url("Media/Wallpaper.png");}
+
+.slide {
+position:absolute;
+top:500px;
+width:80vw;
+height:70vh;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);}
+
+.slide h1 {
+color:rgba(255,255,255,0.3);}
+
+.content {
+position:absolute;
+width:100%;
+height:2000px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.frame {
+position:fixed;
+width:100%;
+height:100%;
+right:0;
+z-index:-1;
+overflow-x:hidden;
+overflow-y:auto;
+display:none;
+direction:ltr;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.account-settings {
+position:fixed;
+width:100%;
+height:100%;
+z-index:3;
+display:flex;
+left:100vw;
+overflow-x:hidden;
+overflow-y:auto;
+direction:ltr;
+justify-content:center;
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.1);}
+
+.account-settings.active {
+left:0;
+width:100%;}
+
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
+width:10px;}
+
+.frame::-webkit-scrollbar-thumb, .account-settings::-webkit-scrollbar-thumb {
+border-radius:5px;
+background:rgba(255,255,255,0.1);}
+
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+display:none;}
+
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
+display:flex;}
+
+.Header {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:55px;
+z-index:1;
+pointer-events:none;}
+
+.account-settings .Header {
+position:absolute;}
+
+.back {
+position:absolute;
+top:10px;
+left:10px;
+border-radius:9px;
+stroke:var(--primary);
+stroke-width:2;
+cursor:pointer;
+pointer-events:auto;
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);
+background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
+
+.Ham {
+position:absolute;
+top:10px;
+left:10px;
+fill:var(--primary);
+cursor:pointer;
+pointer-events:auto;}
+
+.Cross {
+position:absolute;
+top:10px;
+right:10px;
+width:25px;
+height:35px;
+border-radius:10px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+outline:1px solid rgba(255,255,255,0.2);}
+
+.Cross svg {
+fill:var(--primary);}
+
+.side-navbar {
+position:absolute;
+top:1px;
+left:-280px;
+width:260px;
+z-index:2;
+direction:ltr;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:0 20px 20px 0;
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:2px 0 8px rgba(255,255,255,0.1);}
+
+.side-navbar.active {
+left:0;}
+
+.item-list {
+position:absolute;
+top:160px;
+width:220px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:20px;
+list-style:none;
+pointer-events:none;}
+
+.item {
+position:relative;
+width:100%;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+cursor:pointer;}
+
+.item.active {
+pointer-events:none;}
+
+.item .icon {
+position:absolute;
+left:0;
+width:40px;
+height:40px;
+opacity:0.5;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.item .square {
+position:absolute;
+left:0;
+opacity:0;
+pointer-events:none;
+filter:drop-shadow(0 5px 5px rgba(0,0,0,0.8));}
+
+.item.active .icon, .item.active .square, .item.active .Text {
+opacity:1;}
+
+.icon svg {
+fill:var(--primary);}
+
+.item .Text, .account-settings .fields li section span {
+position:absolute;
+opacity:0.5;
+font-size:0.6rem;
+color:var(--primary);}
+
+.item .Text {
+left:50px;}
+
+.account-settings .fields li section span {
+top:0;
+left:5px;}
+
+.account {
+position:absolute;
+bottom:20px;
+width:220px;
+height:90px;
+border-radius:15px;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:0 4px 8px rgba(255,255,255,0.1);
+background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
+
+.info-container {
+position:absolute;
+width:180px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.container {
+position:absolute;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account .container {
+left:0;}
+
+.account .settings {
+position:absolute;
+top:5px;
+right:5px;
+width:30px;
+height:30px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.settings .circle {
+position:absolute;
+width:25px;
+height:25px;
+opacity:0;
+border-radius:50%;
+transform:scale(0.5);
+background:rgba(255,255,255,0.1);}
+
+.account .settings .circle.active {
+animation:Circle 0.6s;}
+
+@keyframes Circle {
+0%{opacity:0;transform:scale(0.5);}
+50%{opacity:1;transform:scale(1);}
+100%{opacity:0;transform:scale(0.5);}}
+
+.container .glass {
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(to bottom right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 75%);}
+
+.container img {
+position:absolute;
+width:95%;
+height:95%;
+border-radius:50%;
+object-fit:cover;
+pointer-events:none;}
+
+.container .Active {
+position:absolute;
+bottom:2px;
+right:2px;
+width:10px;
+height:10px;
+border-radius:50%;
+background:#4abf02;}
+
+.account .account-info {
+position:absolute;
+left:50px;
+width:140px;
+height:80%;
+overflow:hidden;}
+
+.account .account-info h3, .account .account-info span {
+position:absolute;
+max-width:95%;
+font-size:0.7rem;
+font-weight:700;
+white-space:nowrap;
+overflow:hidden;
+color:var(--primary);
+text-overflow:ellipsis;}
+
+.account .account-info h3 {
+top:0;
+font-size:0.7rem;
+font-weight:700;}
+
+.account .account-info span {
+bottom:0;
+font-size:0.5rem;
+font-weight:300;}
+
+.search {
+position:absolute;
+top:90px;
+width:220px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.search svg {
+position:absolute;
+left:2.5px;
+pointer-events:none;
+stroke-width:2;
+stroke:rgba(255,255,255,0.5);}
+
+.input::placeholder {
+position:absolute;
+top:50%;
+font-weight:400;
+font-size:0.6rem;
+transform:translateY(-50%);
+color:rgba(255,255,255,0.7);}
+
+.input:focus::placeholder {
+color:transparent;}
+
+.input {
+position:absolute;
+width:100%;
+height:100%;
+font-weight:400;
+font-size:0.6rem;
+border:none;
+border-radius:10px;
+padding-left:35px;
+caret-color:#fff;
+pointer-events:auto;
+background:var(--background);
+color:rgba(255,255,255,0.5);
+outline:1px solid rgba(255,255,255,0.2);}
+
+.input:focus {
+color:rgba(255,255,255,1);
+outline:1px solid rgba(255,255,255,0.5);}
+
+.account-settings .content {
+position:absolute;
+top:0;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .content-container {
+position:relative;
+width:100%;
+height:670px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.account-settings .container {
+position:absolute;
+width:120px;
+height:120px;
+top:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .container {
+top:50px;
+width:120px;
+height:120px;}
+
+.account-settings .container img {
+width:97%;
+height:97%;}
+
+.account-settings .camera {
+position:absolute;
+bottom:-12px;
+right:-3px;
+width:55px;
+height:55px;
+border-radius:50%;
+cursor:pointer;
+pointer-events:auto;
+fill:#0B1A9B;
+transition:0.3s;
+background:var(--primary);
+box-shadow:-3px 3px 5px rgba(0,0,0,0.1);}
+
+.camera:active, .account-settings .save:active {
+transform:scale(0.8);}
+
+.account-settings .fields {
+position:absolute;
+top:250px;
+list-style:none;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:20px;}
+
+.account-settings .fields li {
+position:relative;
+width:100%;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li section {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;}
+
+.account-settings .fields li:first-child section:nth-child(1), .account-settings .fields li:last-child section:nth-child(1) {
+left:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li:first-child section:nth-child(2), .account-settings .fields li:last-child section:nth-child(2) {
+right:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li section input {
+position:absolute;
+bottom:0;
+width:100%;
+height:40px;
+padding:0 10px;}
+
+.account-settings .fields span.active {
+opacity:1;}
+
+.account-settings .save {
+position:absolute;
+bottom:30px;
+padding:12px 25px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+opacity:0;
+border:none;
+cursor:pointer;
+font-size:0.8rem;
+pointer-events:none;
+color:rgba(255,255,255,1);
+outline:1px solid rgba(255,255,255,0.2);
+box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);
+background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
+
+.save.active {
+opacity:1;
+pointer-events:auto;}
+
+@media screen and (max-width:400px) {
+
+.account-settings .fields {
+width:90%;}
+
+}
+
+@media screen and (min-width:400px) {
+
+.account-settings .fields {
+width:360px;}
+
+}
+
+@media screen and (max-height:670px) {
+
+.side-navbar {
+height:668px;}
+
+.account-settings .content {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.side-navbar {
+height:calc(100% - 2px);}
+
+.account-settings .content {
+height:100%;}
+
+}
+
+</style>
+
+<body>
+
+<div class="Body mouse">
+
+<header class="Header">
+
+<svg class="Ham" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M27.0986 23.1992C27.8717 23.1992 28.4988 23.8256 28.499 24.5986C28.499 25.3718 27.8718 25.999 27.0986 25.999H7.90039C7.12719 25.999 6.5 25.3718 6.5 24.5986C6.50021 23.8256 7.12732 23.1992 7.90039 23.1992H27.0986ZM27.0986 16.0996C27.8718 16.0996 28.499 16.7268 28.499 17.5C28.4989 18.2731 27.8717 18.8994 27.0986 18.8994H7.90039C7.12729 18.8994 6.50016 18.2731 6.5 17.5C6.5 16.7268 7.12719 16.0996 7.90039 16.0996H27.0986ZM27.0986 9C27.8718 9 28.499 9.62719 28.499 10.4004C28.499 11.1736 27.8718 11.8008 27.0986 11.8008H7.90039C7.12719 11.8008 6.5 11.1736 6.5 10.4004C6.5 9.62719 7.12719 9 7.90039 9H27.0986Z"/>
+</svg>
+
+</header>
+
+
+<!-- Account Settings -->
+
+<div class="account-settings">
+
+<div class="content">
+
+<header class="Header">
+  <svg class="back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</header>
+
+<div class="content-container">
+
+<section class="container">
+
+ <div class="glass">
+
+ <img class="profile" src="Media/Amanda.jpg">
+
+ <svg class="camera" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24.2041 16.5869C26.3996 16.471 28.6004 16.471 30.7959 16.5869H30.8008C31.371 16.6204 31.9275 16.7886 32.4229 17.0801C32.9164 17.3706 33.3361 17.7769 33.6445 18.2676L34.6641 19.8721L34.7871 20.041C34.9191 20.204 35.0791 20.3478 35.2627 20.4639C35.4463 20.58 35.6493 20.6662 35.8633 20.7188L36.0811 20.7598L36.085 20.7608C36.562 20.8275 37.0383 20.8998 37.5137 20.9776C39.236 21.2593 40.5 22.7643 40.5 24.5362V34.8311C40.5 35.8212 40.0994 36.76 39.4043 37.4434C38.711 38.125 37.7805 38.4989 36.8203 38.4991H18.1797C17.2194 38.499 16.289 38.125 15.5957 37.4434C14.9006 36.76 14.5 35.8212 14.5 34.8311V24.5362C14.5 22.7647 15.7623 21.2592 17.4863 20.9776C17.9619 20.8995 18.4365 20.8277 18.915 20.7608L18.9199 20.7598C19.2139 20.7203 19.4934 20.6187 19.7383 20.4639C19.9832 20.3091 20.1866 20.106 20.3369 19.8721L21.3545 18.2686C21.663 17.7774 22.0832 17.3708 22.5771 17.0801C23.0725 16.7886 23.6289 16.6204 24.1992 16.5869H24.2041ZM27.5 22.1201C26.1279 22.1202 24.812 22.6872 23.8418 23.6963C22.8715 24.7055 22.3262 26.0739 22.3262 27.501C22.3262 28.9282 22.8715 30.2965 23.8418 31.3057C24.812 32.3148 26.1278 32.8818 27.5 32.8819C28.8723 32.8819 30.1888 32.3148 31.1592 31.3057C32.1292 30.2966 32.6738 28.928 32.6738 27.501C32.6738 26.0741 32.1293 24.7054 31.1592 23.6963C30.1888 22.6872 28.8723 22.1201 27.5 22.1201Z"/>
+ </svg>
+
+ </div>
+
+</section>
+
+<!-- Fields -->
+
+<ul class="fields">
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+<li><section></section></li>
+
+<li><section></section></li>
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+</ul>
+
+<button class="save">Save</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+<div class="search">
+
+ <input class="input" placeholder="Search">
+
+ <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 22L18.6221 18.6221M18.6221 18.6221C19.1999 18.0444 19.6583 17.3584 19.971 16.6035C20.2837 15.8486 20.4446 15.0394 20.4446 14.2223C20.4446 13.4052 20.2837 12.5961 19.971 11.8411C19.6583 11.0862 19.1999 10.4003 18.6221 9.82247C18.0444 9.24468 17.3584 8.78635 16.6035 8.47365C15.8486 8.16094 15.0394 8 14.2223 8C13.4052 8 12.5961 8.16094 11.8411 8.47365C11.0862 8.78635 10.4003 9.24468 9.82247 9.82247C8.65556 10.9894 8 12.5721 8 14.2223C8 15.8726 8.65556 17.4552 9.82247 18.6221C10.9894 19.7891 12.5721 20.4446 14.2223 20.4446C15.8726 20.4446 17.4552 19.7891 18.6221 18.6221Z" stroke-linecap="round" stroke-linejoin="round"/>
+ </svg>
+
+</div>
+
+
+<ul class="item-list"></ul>
+
+
+<!-- Account info -->
+
+<section class="account">
+
+ <div class="info-container">
+
+  <section class="container">
+   <div class="glass">
+    <img class="profile">
+    <div class="Active"></div>
+   </div>
+  </section>
+
+  <section class="account-info">
+   <h3></h3>
+   <span></span>
+  </section>
+
+ </div>
+
+ <div class="settings">
+  <div class="circle"></div>
+  <img src="Icons/settings.svg">
+ </div>
+
+</section>
+
+<div class="Cross">
+
+ <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M15.9971 8.5127C16.0373 8.52072 16.0771 8.53204 16.1152 8.54785C16.1916 8.5795 16.261 8.6263 16.3193 8.68457C16.3775 8.74294 16.4245 8.81237 16.4561 8.88867C16.4876 8.96502 16.5039 9.04733 16.5039 9.12988L16.4912 9.25293C16.4832 9.29312 16.4718 9.33306 16.4561 9.37109C16.4244 9.4473 16.3778 9.5168 16.3193 9.5752L13.3926 12.499L16.3193 15.4248C16.4372 15.5427 16.5036 15.7026 16.5039 15.8691C16.504 16.036 16.4372 16.1964 16.3193 16.3145C16.2015 16.4324 16.0418 16.4988 15.875 16.499C15.7082 16.4991 15.5478 16.4332 15.4297 16.3154L12.5029 13.3887L9.5791 16.3154C9.52069 16.3738 9.45033 16.4205 9.37402 16.4521C9.29792 16.4836 9.21617 16.4999 9.13379 16.5C8.96689 16.5 8.80654 16.4333 8.68848 16.3154C8.63022 16.2571 8.58342 16.1876 8.55176 16.1113C8.52012 16.0349 8.50393 15.9527 8.50391 15.8701C8.50391 15.7875 8.52008 15.7053 8.55176 15.6289C8.58342 15.5525 8.63018 15.4832 8.68848 15.4248L11.6133 12.499L8.68848 9.5752C8.57048 9.4572 8.50401 9.2967 8.50391 9.12988C8.50392 8.96291 8.57044 8.80268 8.68848 8.68457L8.78418 8.60547C8.88682 8.53711 9.00863 8.5 9.13379 8.5C9.30057 8.50013 9.46113 8.5666 9.5791 8.68457L12.5029 11.6094L15.4297 8.68457C15.4881 8.62624 15.5575 8.5794 15.6338 8.54785C15.7101 8.51631 15.7924 8.5 15.875 8.5L15.9971 8.5127Z"/>
+ </svg>
+
+</div>
+
+</div>
+
+</div>
+
+<input type="file" id="CameraInput" accept="image/*" style="display:none;"/>
+
+<script src="JS/HamGlass.js"></script>
+
+</body>
+
+</html>

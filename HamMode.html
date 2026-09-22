@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Hamburger Menu Design - Dark & Light Mode Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:#A3A3A3;
+--color:#ABFF70;}
+
+body {
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;}
+
+* {
+margin:0;
+padding:0;
+transition:0.2s;
+user-select:none;
+font-weight:650;
+font-style:normal;
+box-sizing:border-box;
+font-family:"Prompt", serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow-x:hidden;
+overflow-y:hidden;
+direction:rtl;
+background:linear-gradient(to bottom right,#ABFF70,#49A626);}
+
+.Body.dark {
+--search:rgba(255,255,255,0.05);
+--secondary:#fff;
+--background:#171A21;
+--theme:#ABFF70;
+--theme1:rgba(255,255,255,0.1);
+--theme2:rgba(255,255,255,0.02);
+--color:#ABFF70;
+--layer:rgba(124,222,81,0.1);
+--shadow:rgba(194,198,223,0.5);
+--text:#C2C6DF;}
+
+.Body.light {
+--search:rgba(0,0,0,0.03);
+--secondary:#171A21;
+--background:#fff;
+--theme:rgba(61,66,95,0.2);
+--theme1:rgba(61,66,95,0.2);
+--theme2:rgba(61,66,95,0.02);
+--color:#68D51A;
+--layer:rgba(124,222,81,0.2);
+--shadow:rgba(61,66,95,0.5);}
+
+.slide {
+position:absolute;
+height:70vh;
+width:80vw;
+top:500px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--background);
+box-shadow:4px 4.5px 12px rgba(0,0,0,0.2);}
+
+.slide h1 {
+color:var(--shadow);
+font-size:1.5rem;}
+
+.content {
+position:absolute;
+width:100%;
+height:2000px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.frame {
+position:fixed;
+right:0;
+width:100%;
+height:100%;
+z-index:-1;
+overflow-x:hidden;
+overflow-y:auto;
+display:none;
+direction:ltr;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.frame::-webkit-scrollbar {
+width:10px;}
+
+.frame::-webkit-scrollbar-thumb {
+background:var(--background);
+border-radius:5px;}
+
+.Body.touch .frame::-webkit-scrollbar {
+display:none;}
+
+.Body.mouse .frame::-webkit-scrollbar {
+display:flex;}
+
+.Header {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:55px;
+pointer-events:none;}
+
+.Ham {
+position:absolute;
+top:10px;
+left:10px;
+cursor:pointer;
+pointer-events:auto;
+fill:var(--background);}
+
+.Cross {
+position:absolute;
+top:10px;
+right:10px;
+fill:var(--primary);
+cursor:pointer;}
+
+.side-navbar {
+position:absolute;
+top:0;
+left:-220px;
+width:220px;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+direction:ltr;
+transition:all 0.2s, left 0.4s;
+border-radius:0 35px 35px 0;
+background:var(--background);
+box-shadow:3px 0 3px rgba(0,0,0,0.1);}
+
+.side-navbar.active {
+left:0;}
+
+.item-list {
+position:absolute;
+left:10px;
+top:40px;
+width:calc(100% - 20px);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;}
+
+.item {
+position:relative;
+width:100%;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:15px;
+transition:0.4s;
+cursor:pointer;
+pointer-events:auto;}
+
+.item.active {
+pointer-events:none;
+background:var(--layer);}
+
+.item.N {
+overflow:hidden;}
+
+.item .icon {
+position:absolute;
+left:0;}
+
+.item .icon {
+fill:var(--shadow);}
+
+.item .Text {
+position:absolute;
+left:35px;
+color:var(--shadow);
+font-size:0.55rem;
+white-space:nowrap;}
+
+.item.active .icon {
+fill:var(--color);}
+
+.item.active .Text {
+color:var(--color);}
+
+footer {
+position:absolute;
+left:10px;
+bottom:90px;
+width:calc(100% - 20px);
+height:102px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+transition:0.4s;
+gap:6px;}
+
+footer .line {
+position:absolute;
+top:-6px;
+left:0;
+width:100%;
+height:0.5px;
+opacity:0.5;
+transition:0.4s;
+background:var(--shadow);}
+
+.theme {
+position:absolute;
+bottom:10px;
+left:10px;
+width:calc(100% - 20px);
+height:50px;
+transition:0.4s;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+border-radius:25px;
+background:var(--theme2);
+outline:0.5px solid var(--theme1);}
+
+.theme-icon {
+position:absolute;
+left:10px;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.theme-icon img {
+position:absolute;
+display:none;}
+
+.Body.light .Light, .Body.dark .Dark {
+display:flex;}
+
+.Body.light .Dark, .Body.dark .Light {
+display:none;}
+
+.theme .toggle {
+position:absolute;
+left:150px;
+width:35px;
+height:20px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+cursor:pointer;
+background:var(--theme);}
+
+.theme .thumb {
+position:absolute;
+left:2.5px;
+width:15px;
+height:15px;
+border-radius:7.5px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+background:var(--secondary);
+box-shadow:-1px 1px 2px rgba(0,0,0,0.3);}
+
+.theme.active .thumb {
+left:17.5px;}
+
+.theme span {
+position:absolute;
+left:45px;
+font-size:0.7rem;
+color:var(--secondary);}
+
+.logo {
+overflow:hidden;
+transform:translateY(-20px);}
+
+.logo .wrapper {
+position:absolute;
+left:40px;
+width:100px;
+display:flex;}
+
+.logo span {
+position:relative;
+font-size:0.8rem;
+font-weight:600;}
+
+.logo span:nth-child(1) {
+color:var(--secondary);}
+
+.logo span:nth-child(2) {
+color:var(--color);}
+
+.logo img {
+position:absolute;
+left:0;}
+
+.search {
+transform:translateY(-10px);}
+
+.search svg {
+position:absolute;
+left:0;
+fill:var(--shadow);
+pointer-events:none;}
+
+.input::placeholder {
+position:absolute;
+top:50%;
+color:var(--shadow);
+font-weight:400;
+font-size:0.6rem;
+transform:translate(5px,-50%);}
+
+.input:focus::placeholder {
+color:transparent;}
+
+.input {
+position:absolute;
+left:0;
+width:100%;
+height:100%;
+pointer-events:auto;
+cursor:pointer;
+transition:0.4s;
+font-weight:400;
+font-size:0.6rem;
+border-radius:15px;
+padding-left:30px;
+border:none;
+color:var(--shadow);
+background:var(--search);
+caret-color:var(--shadow);
+outline:1px solid var(--shadow);}
+
+@media screen and (max-height:670px) {
+
+.side-navbar {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.side-navbar {
+height:100%;}
+
+}
+
+</style>
+
+<body>
+
+<div class="Body dark mouse">
+
+<header class="Header">
+
+<svg class="Ham" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M27.0986 23.1992C27.8717 23.1992 28.4988 23.8256 28.499 24.5986C28.499 25.3718 27.8718 25.999 27.0986 25.999H7.90039C7.12719 25.999 6.5 25.3718 6.5 24.5986C6.50021 23.8256 7.12732 23.1992 7.90039 23.1992H27.0986ZM27.0986 16.0996C27.8718 16.0996 28.499 16.7268 28.499 17.5C28.4989 18.2731 27.8717 18.8994 27.0986 18.8994H7.90039C7.12729 18.8994 6.50016 18.2731 6.5 17.5C6.5 16.7268 7.12719 16.0996 7.90039 16.0996H27.0986ZM27.0986 9C27.8718 9 28.499 9.62719 28.499 10.4004C28.499 11.1736 27.8718 11.8008 27.0986 11.8008H7.90039C7.12719 11.8008 6.5 11.1736 6.5 10.4004C6.5 9.62719 7.12719 9 7.90039 9H27.0986Z"/>
+</svg>
+
+</header>
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+
+<!-- Items -->
+
+<ul class="item-list">
+
+
+<!-- Logo -->
+
+<li class="item logo">
+
+ <img src="Icons/Logo.svg">
+
+ <div class="wrapper">
+  <span>Trade</span>
+  <span>Flux</span>
+ </div>
+
+</li>
+
+
+<!-- Search -->
+
+<li class="item search">
+
+ <input class="input" placeholder="Search">
+
+ <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.3135 8C15.1427 8.00004 15.9643 8.16317 16.7305 8.48047C17.4968 8.79791 18.1937 9.26397 18.7803 9.85059C19.3666 10.4371 19.832 11.1331 20.1494 11.8994C20.4669 12.6659 20.6309 13.4879 20.6309 14.3174C20.6308 15.1467 20.4668 15.9681 20.1494 16.7344C19.9415 17.2363 19.6691 17.708 19.3418 18.1387L21.7461 20.543C22.0794 20.8764 22.0794 21.4167 21.7461 21.75C21.4127 22.083 20.8723 22.0832 20.5391 21.75L18.1338 19.3447C17.041 20.1751 15.7014 20.6347 14.3135 20.6348C12.6384 20.6347 11.0313 19.9687 9.84668 18.7842C8.66215 17.5996 7.99623 15.9926 7.99609 14.3174C7.99609 12.6422 8.66218 11.0353 9.84668 9.85059C10.4332 9.26413 11.1293 8.79794 11.8955 8.48047C12.6619 8.16305 13.484 8.00005 14.3135 8ZM14.3135 9.70703C13.7083 9.70709 13.1081 9.82599 12.5488 10.0576C11.9897 10.2893 11.4817 10.6296 11.0537 11.0576C10.1894 11.9221 9.70312 13.095 9.70312 14.3174C9.70327 15.5398 10.1894 16.7128 11.0537 17.5771C11.9181 18.4414 13.0912 18.9266 14.3135 18.9268C15.5359 18.9267 16.7088 18.4414 17.5732 17.5771C18.0012 17.1493 18.3406 16.6402 18.5723 16.0811C18.8038 15.522 18.9228 14.9225 18.9229 14.3174C18.9229 13.712 18.8039 13.1121 18.5723 12.5527C18.3407 11.9937 18.0012 11.4857 17.5732 11.0576C17.1453 10.6297 16.6364 10.2893 16.0771 10.0576C15.5182 9.82615 14.9185 9.70707 14.3135 9.70703Z"/>
+ </svg>
+
+</li>
+
+</ul>
+
+
+<!-- Footer -->
+
+<footer>
+
+<div class="line"></div>
+
+</footer>
+
+
+<!-- Theme -->
+
+<section class="theme active">
+
+ <div class="theme-icon">
+  <img class="Light" src="Icons/light.svg">
+  <img class="Dark" src="Icons/dark.svg">
+ </div>
+
+ <span>Dark</span>
+
+ <section class="toggle">
+  <div class="thumb"></div>
+ </section>
+
+</section>
+
+<svg class="Cross" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.4424 11.3828C22.566 11.3829 22.6893 11.4077 22.8037 11.4551C22.9182 11.5025 23.0229 11.5728 23.1104 11.6602C23.1976 11.7477 23.2671 11.8524 23.3145 11.9668C23.3616 12.081 23.3856 12.2037 23.3857 12.3271V12.3281C23.3856 12.4516 23.3617 12.5743 23.3145 12.6885C23.2669 12.8029 23.1972 12.9074 23.1094 12.9951L18.7207 17.3818L23.1094 21.7695C23.2863 21.9463 23.3853 22.1866 23.3857 22.4365C23.3859 22.6868 23.2871 22.9274 23.1104 23.1045C22.9334 23.2815 22.6928 23.3817 22.4424 23.3818C22.2236 23.3818 22.0126 23.3052 21.8447 23.168L21.7754 23.1055L17.3857 18.7168L12.999 23.1055C12.9333 23.1712 12.8581 23.2268 12.7764 23.2705L12.6924 23.3105C12.5779 23.3579 12.455 23.3818 12.3311 23.3818C12.1119 23.3817 11.9004 23.3056 11.7324 23.168L11.6631 23.1055C11.5758 23.0179 11.5054 22.9132 11.458 22.7988C11.4107 22.6844 11.3867 22.5612 11.3867 22.4375C11.3868 22.3138 11.4106 22.1906 11.458 22.0762L11.498 21.9922C11.5418 21.9105 11.5975 21.8352 11.6631 21.7695L16.0508 17.3818L11.6631 12.9951C11.4862 12.8181 11.3868 12.5774 11.3867 12.3271C11.3868 12.0768 11.4861 11.8363 11.6631 11.6592L11.7324 11.5967C11.9004 11.459 12.112 11.3829 12.3311 11.3828C12.5813 11.3828 12.822 11.4823 12.999 11.6592L17.3857 16.0469L21.7754 11.6592L21.8438 11.5967C21.9152 11.5382 21.9954 11.4906 22.0811 11.4551C22.1954 11.4078 22.3187 11.3829 22.4424 11.3828Z"/>
+</svg>
+
+</div>
+
+</div>
+
+<script src="JS/HamMode.js"></script>
+
+</body>
+
+</html>

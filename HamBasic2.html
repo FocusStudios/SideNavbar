@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Hamburger Menu Design - Basic 2</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:#8307BD;
+--secondary:#A3A3A3;
+--Background:white;
+--section:#CACACA;
+--Hover:rgba(131,7,189,0.1);
+--hover:rgba(131,7,189,0.2);
+--background:rgba(255,255,255,0.2);
+--account:rgba(255, 255, 255,0.1);}
+
+body {
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+* {
+margin:0;
+padding:0;
+transition:0.5s;
+user-select:none;
+font-weight:650;
+font-style:normal;
+box-sizing:border-box;
+font-family:"Prompt", serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:fixed;
+top:0;
+width:100vw;
+height:100vh;
+direction:rtl;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow-x:hidden;
+overflow-y:hidden;
+background:var(--primary);}
+
+.slide {
+position:absolute;
+top:500px;
+height:70vh;
+width:80vw;
+opacity:20%;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:rgba(0,0,0,0.3);
+background-color:var(--Background);
+box-shadow:1px 4.5px 12px currentcolor;}
+
+.content {
+position:absolute;
+width:100%;
+height:2000px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.frame {
+position:fixed;
+width:100%;
+height:100%;
+right:0;
+z-index:-1;
+overflow-x:hidden;
+overflow-y:auto;
+display:none;
+direction:ltr;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.S, .account-settings {
+position:fixed;
+width:100%;
+height:100%;
+z-index:2;
+display:flex;
+left:100vw;
+overflow-x:hidden;
+overflow-y:auto;
+direction:ltr;
+justify-content:center;
+background:var(--primary);}
+
+.account-settings {
+background:var(--Background);}
+
+.S.active, .account-settings.active {
+left:0;
+width:100%;}
+
+.frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
+width:10px;}
+
+.frame::-webkit-scrollbar-thumb {
+border-radius:5px;
+background:rgba(255, 255, 255,0.3);}
+
+.account-settings::-webkit-scrollbar-thumb {
+border-radius:5px;
+background:#DAB3EA;}
+
+.Body.touch .frame::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+display:none;}
+
+.Body.mouse .frame::-webkit-scrollbar, .Body.mouse .account-settings::-webkit-scrollbar {
+display:flex;}
+
+.Header {
+position:absolute;
+top:0;
+width:100%;
+height:55px;
+pointer-events:none;}
+
+.S .Header {
+position:sticky;}
+
+.Header.H {
+position:fixed;
+left:0;}
+
+.Ham {
+position:absolute;
+top:10px;
+left:10px;
+cursor:pointer;
+pointer-events:auto;
+fill:var(--Background);}
+
+.back {
+position:absolute;
+top:10px;
+left:10px;
+border-radius:9px;
+cursor:pointer;
+pointer-events:auto;
+stroke:var(--Background); 
+background:rgba(255,255,255,0.2);
+box-shadow:1px 3px 6px rgba(0,0,0,0.15);}
+
+.Back {
+background:var(--hover);}
+
+.Cross {
+position:absolute;
+top:0;
+right:0;
+fill:var(--primary);
+cursor:pointer;}
+
+.side-navbar {
+position:absolute;
+top:0;
+left:-220px;
+width:220px;
+direction:ltr;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--Background);}
+
+.side-navbar.active {
+left:0;}
+
+.item-list {
+position:absolute;
+left:0;
+top:90px;
+width:220px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;
+pointer-events:none;}
+
+.item {
+position:relative;
+width:220px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.item-btn {
+position:absolute;
+left:0;
+top:0;
+width:220px;
+height:30px;
+cursor:pointer;
+pointer-events:auto;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.item-btn.active {
+cursor:default;}
+
+.item.menu .item-btn.active {
+cursor:pointer;}
+
+.item-btn.active .icon, .item-btn.active .arrow {
+fill:var(--primary);}
+
+.item-btn.active .Text {
+color:var(--primary);}
+
+.item-btn.active .indicator {
+opacity:1;}
+
+.menu-item.active {
+background:var(--Hover);}
+
+.menu-item.active span {
+color:var(--primary);}
+
+.item-btn.active .arrow {
+transform:rotate(180deg);}
+
+.item .icon, .item .arrow {
+position:absolute;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.item .icon {
+left:10px;
+fill:var(--secondary);}
+
+.item .arrow {
+left:180px;
+fill:var(--secondary);}
+
+.indicator {
+position:absolute;
+left:0;
+width:6px;
+height:26px;
+opacity:0;
+border-radius:0 7px 7px 0 ;
+background:var(--primary);}
+
+.item-btn .Text, .menu-item span, .account-settings .fields li section span {
+position:absolute;
+font-size:0.6rem;
+color:var(--secondary);}
+
+.item-btn .Text, .menu-item span {
+left:45px;
+width:120px;}
+
+.menu-item span {
+left:10px;
+font-size:0.55rem;}
+
+.item.menu.active {
+height:174px;}
+
+.menu-container {
+position:absolute;
+top:30px;
+left:0;
+width:220px;
+height:0;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;}
+
+.item.menu.active .menu-container {
+height:144px;}
+
+.menu-content {
+position:absolute;
+top:6px;
+left:0;
+width:220px;
+height:138px;
+display:flex;
+align-items:center;
+justify-content:start;}
+
+.menu-list {
+position:absolute;
+top:0;
+left:24.5px;
+width:185.5px;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;}
+
+.menu-list-item {
+position:relative;
+width:100%;
+height:30px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.menu-item {
+position:relative;
+margin-left:10px;
+width:calc(100% - 10px);
+height:100%;
+border-radius:7px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.menu-list .line {
+position:absolute;
+top:0;
+left:0.25px;
+width:0.5px;
+height:122px;
+background:var(--secondary);}
+
+footer {
+position:absolute;
+left:10px;
+bottom:20px;
+width:200px;
+height:102px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+pointer-events:none;}
+
+footer .line {
+position:absolute;
+top:-6px;
+left:0;
+width:30px;
+height:0.5px;
+background:var(--section);}
+
+.side-navbar.active footer .line {
+width:200px;}
+
+.account {
+position:absolute;
+top:0;
+width:220px;
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.info-wrapper {
+position:absolute;
+top:0;
+width:100%;
+height:80px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+background:var(--Background);
+box-shadow:0 3px 5px rgba(0,0,0,0.05);}
+
+.info-container {
+position:absolute;
+top:30px;
+left:7.5px;
+width:200px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.account .container {
+position:absolute;
+left:0;
+width:35px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+cursor:pointer;}
+
+.account .container:active {
+transform:scale(0.8);}
+
+.account .container img {
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;}
+
+.account .account-info {
+position:absolute;
+left:45px;
+width:140px;
+height:90%;
+overflow:hidden;}
+
+.account .account-info h3, .account .account-info span {
+position:absolute;
+max-width:95%;
+color:var(--primary);
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;}
+
+.account .account-info h3 {
+top:0;
+font-size:0.7rem;
+font-weight:700;}
+
+.account .account-info span {
+bottom:0;
+font-size:0.5rem;
+font-weight:300;}
+
+.account-settings .content {
+position:absolute;
+top:0;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .content-container {
+position:relative;
+width:100%;
+height:670px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;}
+
+.account-settings .container {
+position:absolute;
+width:120px;
+height:120px;
+top:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .container img {
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;}
+
+.account-settings .camera {
+position:absolute;
+bottom:-12px;
+right:-3px;
+width:55px;
+height:55px;
+border-radius:50%;
+transition:0.3s;
+cursor:pointer;
+pointer-events:auto;
+background:#DAB3EA;
+fill:var(--Background);
+box-shadow:-3px 3px 5px rgba(0,0,0,0.1);}
+
+.camera:active, .account-settings .save:active {
+transform:scale(0.8);}
+
+.account-settings .fields {
+position:absolute;
+top:250px;
+list-style:none;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:20px;}
+
+.account-settings .fields li {
+position:relative;
+width:100%;
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li section {
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.account-settings .fields li:first-child section:nth-child(1), .account-settings .fields li:last-child section:nth-child(1) {
+left:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li:first-child section:nth-child(2), .account-settings .fields li:last-child section:nth-child(2) {
+right:0;
+width:calc(50% - 20px);}
+
+.account-settings .fields li section input {
+position:absolute;
+bottom:0;
+width:100%;
+height:35px;
+padding:0 10px;
+border-radius:8px;
+border:none;
+background:none;
+pointer-events:auto;
+transition:0.3s;
+font-size:0.65rem;
+color:rgba(0,0,0,0.2);
+outline:1.5px solid rgba(0,0,0,0.2);}
+
+.account-settings .fields li section span {
+top:0;
+left:10px;
+color:rgba(0,0,0,0.2);}
+
+.account-settings .fields li section span.active {
+color:var(--primary);}
+
+.account-settings .fields li section input:focus {
+color:var(--primary);
+outline:1.5px solid var(--primary);}
+
+.account-settings .Header {
+position:absolute;}
+
+.account-settings .save {
+position:absolute;
+bottom:30px;
+padding:10px 25px;
+border-radius:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+border:none;
+cursor:pointer;
+pointer-events:none;
+background:#F1F1F1;
+color:var(--secondary);
+box-shadow:-2px 2px 5px rgba(0,0,0,0.1);}
+
+.save.active {
+pointer-events:auto;
+color:var(--primary);
+background:var(--Hover);}
+
+.save.active:hover {
+color:var(--Background);
+background:var(--primary);}
+
+@media screen and (max-width:400px) {
+
+.account-settings .fields {
+width:90%;}
+
+}
+
+@media screen and (min-width:400px) {
+
+.account-settings .fields {
+width:360px;}
+
+}
+
+@media screen and (max-height:670px) {
+
+.side-navbar {
+height:670px;}
+
+.account-settings .content {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.side-navbar {
+height:100%;}
+
+.account-settings .content {
+height:100%;}
+
+}
+
+</style>
+
+<body>
+
+<div class="Body mouse">
+
+<header class="Header H">
+
+<svg class="Ham" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <path d="M27.0986 23.1992C27.8717 23.1992 28.4988 23.8256 28.499 24.5986C28.499 25.3718 27.8718 25.999 27.0986 25.999H7.90039C7.12719 25.999 6.5 25.3718 6.5 24.5986C6.50021 23.8256 7.12732 23.1992 7.90039 23.1992H27.0986ZM27.0986 16.0996C27.8718 16.0996 28.499 16.7268 28.499 17.5C28.4989 18.2731 27.8717 18.8994 27.0986 18.8994H7.90039C7.12729 18.8994 6.50016 18.2731 6.5 17.5C6.5 16.7268 7.12719 16.0996 7.90039 16.0996H27.0986ZM27.0986 9C27.8718 9 28.499 9.62719 28.499 10.4004C28.499 11.1736 27.8718 11.8008 27.0986 11.8008H7.90039C7.12719 11.8008 6.5 11.1736 6.5 10.4004C6.5 9.62719 7.12719 9 7.90039 9H27.0986Z"/>
+</svg>
+
+</header>
+
+<!-- Account Settings -->
+
+<div class="account-settings">
+
+<div class="content">
+
+<header class="Header">
+  <svg class="back Back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</header>
+
+<div class="content-container">
+
+<section class="container">
+
+ <img class="profile" src="Media/Daniel.png">
+
+ <svg class="camera" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24.2041 16.5869C26.3996 16.471 28.6004 16.471 30.7959 16.5869H30.8008C31.371 16.6204 31.9275 16.7886 32.4229 17.0801C32.9164 17.3706 33.3361 17.7769 33.6445 18.2676L34.6641 19.8721L34.7871 20.041C34.9191 20.204 35.0791 20.3478 35.2627 20.4639C35.4463 20.58 35.6493 20.6662 35.8633 20.7188L36.0811 20.7598L36.085 20.7608C36.562 20.8275 37.0383 20.8998 37.5137 20.9776C39.236 21.2593 40.5 22.7643 40.5 24.5362V34.8311C40.5 35.8212 40.0994 36.76 39.4043 37.4434C38.711 38.125 37.7805 38.4989 36.8203 38.4991H18.1797C17.2194 38.499 16.289 38.125 15.5957 37.4434C14.9006 36.76 14.5 35.8212 14.5 34.8311V24.5362C14.5 22.7647 15.7623 21.2592 17.4863 20.9776C17.9619 20.8995 18.4365 20.8277 18.915 20.7608L18.9199 20.7598C19.2139 20.7203 19.4934 20.6187 19.7383 20.4639C19.9832 20.3091 20.1866 20.106 20.3369 19.8721L21.3545 18.2686C21.663 17.7774 22.0832 17.3708 22.5771 17.0801C23.0725 16.7886 23.6289 16.6204 24.1992 16.5869H24.2041ZM27.5 22.1201C26.1279 22.1202 24.812 22.6872 23.8418 23.6963C22.8715 24.7055 22.3262 26.0739 22.3262 27.501C22.3262 28.9282 22.8715 30.2965 23.8418 31.3057C24.812 32.3148 26.1278 32.8818 27.5 32.8819C28.8723 32.8819 30.1888 32.3148 31.1592 31.3057C32.1292 30.2966 32.6738 28.928 32.6738 27.501C32.6738 26.0741 32.1293 24.7054 31.1592 23.6963C30.1888 22.6872 28.8723 22.1201 27.5 22.1201Z"/>
+ </svg>
+
+</section>
+
+<!-- Fields -->
+
+<ul class="fields">
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+<li><section></section></li>
+
+<li><section></section></li>
+
+<li>
+
+<section></section>
+
+<section></section>
+
+</li>
+
+</ul>
+
+<button class="save">Save</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+<ul class="item-list"></ul>
+
+<footer>
+
+<div class="line"></div>
+
+</footer>
+
+<section class="account">
+
+ <div class="info-wrapper">
+
+  <div class="info-container">
+
+   <section class="container">
+    <img class="profile" src="">
+   </section>
+
+   <section class="account-info">
+    <h3></h3>
+    <span></span>
+   </section>
+
+  </div>
+
+ </div>
+
+</section>
+
+<svg class="Cross" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.4424 11.3828C22.566 11.3829 22.6893 11.4077 22.8037 11.4551C22.9182 11.5025 23.0229 11.5728 23.1104 11.6602C23.1976 11.7477 23.2671 11.8524 23.3145 11.9668C23.3616 12.081 23.3856 12.2037 23.3857 12.3271V12.3281C23.3856 12.4516 23.3617 12.5743 23.3145 12.6885C23.2669 12.8029 23.1972 12.9074 23.1094 12.9951L18.7207 17.3818L23.1094 21.7695C23.2863 21.9463 23.3853 22.1866 23.3857 22.4365C23.3859 22.6868 23.2871 22.9274 23.1104 23.1045C22.9334 23.2815 22.6928 23.3817 22.4424 23.3818C22.2236 23.3818 22.0126 23.3052 21.8447 23.168L21.7754 23.1055L17.3857 18.7168L12.999 23.1055C12.9333 23.1712 12.8581 23.2268 12.7764 23.2705L12.6924 23.3105C12.5779 23.3579 12.455 23.3818 12.3311 23.3818C12.1119 23.3817 11.9004 23.3056 11.7324 23.168L11.6631 23.1055C11.5758 23.0179 11.5054 22.9132 11.458 22.7988C11.4107 22.6844 11.3867 22.5612 11.3867 22.4375C11.3868 22.3138 11.4106 22.1906 11.458 22.0762L11.498 21.9922C11.5418 21.9105 11.5975 21.8352 11.6631 21.7695L16.0508 17.3818L11.6631 12.9951C11.4862 12.8181 11.3868 12.5774 11.3867 12.3271C11.3868 12.0768 11.4861 11.8363 11.6631 11.6592L11.7324 11.5967C11.9004 11.459 12.112 11.3829 12.3311 11.3828C12.5813 11.3828 12.822 11.4823 12.999 11.6592L17.3857 16.0469L21.7754 11.6592L21.8438 11.5967C21.9152 11.5382 21.9954 11.4906 22.0811 11.4551C22.1954 11.4078 22.3187 11.3829 22.4424 11.3828Z"/>
+</svg>
+
+</div>
+
+</div>
+
+<input type="file" id="CameraInput" accept="image/*" style="display:none;"/>
+
+<script src="JS/HamBasic2.js"></script>
+
+</body>
+
+</html>
