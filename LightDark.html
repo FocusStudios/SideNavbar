@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<title>Side Navbar Design - Dark & Light Mode Effect</title>
+    
+<style>
+
+html {
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;}
+
+:root {
+--primary:#A3A3A3;
+--color:#ABFF70;}
+
+body {
+margin:0;
+width:100vw;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;}
+
+* {
+margin:0;
+padding:0;
+transition:0.2s;
+user-select:none;
+font-weight:650;
+font-style:normal;
+box-sizing:border-box;
+font-family:"Prompt", serif;}
+
+img {
+pointer-events:none;}
+
+.Body {
+position:absolute;
+width:100vw;
+height:100vh;
+overflow-x:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(to bottom right,#ABFF70,#49A626);}
+
+.main-container {
+position:absolute;
+top:max(0px,calc((100vh - (600px + 220px * (100vw - 360px) / 1200px)) / 2));
+width:100vw;
+height:calc(600px + 220px * (100vw - 360px) / 1200px);
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.Body.dark {
+--search:rgba(255,255,255,0.05);
+--secondary:#fff;
+--background:#171A21;
+--theme:#ABFF70;
+--theme1:rgba(255,255,255,0.1);
+--theme2:rgba(255,255,255,0.02);
+--color:#ABFF70;
+--layer:rgba(124,222,81,0.1);
+--shadow:rgba(194,198,223,0.5);
+--text:#C2C6DF;}
+
+.Body.light {
+--search:rgba(0,0,0,0.03);
+--secondary:#171A21;
+--background:#fff;
+--theme:rgba(61,66,95,0.2);
+--theme1:rgba(61,66,95,0.2);
+--theme2:rgba(61,66,95,0.02);
+--color:#68D51A;
+--layer:rgba(124,222,81,0.2);
+--shadow:rgba(61,66,95,0.5);}
+
+.slide {
+position:absolute;
+height:70vh;
+width:80vw;
+top:500px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--background);
+box-shadow:4px 4.5px 12px rgba(0,0,0,0.2);}
+
+.slide h1 {
+color:var(--shadow);
+font-size:1.5rem;}
+
+.content {
+position:absolute;
+left:50px;
+width:calc(100% - 50px);
+height:2000px;
+display:none;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.frame {
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+display:none;
+align-items:center;
+justify-content:center;}
+
+.frame.active {
+display:flex;}
+
+.side-navbar {
+position:absolute;
+width:50px;
+height:670px;
+z-index:2;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:auto;
+border-radius:35px;
+transition:0.4s;
+transform:scale(calc(0.8 + 0.3*(100vw - 360px)/1200px));
+background:var(--background);
+box-shadow:-3px 3px 3px rgba(0,0,0,0.1);}
+
+.item-list {
+position:absolute;
+left:10px;
+top:40px;
+width:calc(100% - 20px);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:6px;
+list-style:none;}
+
+.item {
+position:relative;
+width:100%;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+pointer-events:auto;
+border-radius:15px;
+transition:0.4s;}
+
+.item .container {
+position:absolute;
+left:0;
+width:90%;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:15px;
+transition:0.4s;
+overflow:hidden;}
+
+.item.active {
+pointer-events:none;
+background:var(--layer);}
+
+.item.N {
+overflow:hidden;}
+
+.item .icon {
+position:absolute;
+left:0;}
+
+.item .icon {
+fill:var(--shadow);}
+
+.item .Text {
+position:absolute;
+left:35px;
+color:var(--shadow);
+font-size:0.55rem;
+white-space:nowrap;}
+
+.item.active .icon {
+fill:var(--color);}
+
+.item.active .Text {
+color:var(--color);}
+
+footer {
+position:absolute;
+left:10px;
+bottom:90px;
+width:calc(100% - 20px);
+height:102px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+transition:0.4s;
+gap:6px;}
+
+footer .line {
+position:absolute;
+top:-6px;
+left:0;
+width:100%;
+height:0.5px;
+opacity:0.5;
+transition:0.4s;
+background:var(--shadow);}
+
+.theme {
+position:absolute;
+bottom:10px;
+left:10px;
+width:calc(100% - 20px);
+height:50px;
+transition:0.4s;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+border-radius:25px;
+background:var(--theme2);
+outline:0.5px solid var(--theme1);}
+
+.theme-icon {
+position:absolute;
+left:0;
+width:30px;
+height:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;}
+
+.theme-icon img {
+position:absolute;
+display:none;}
+
+.Body.light .Light, .Body.dark .Dark {
+display:flex;}
+
+.Body.light .Dark, .Body.dark .Light {
+display:none;}
+
+.theme .toggle {
+position:absolute;
+left:150px;
+width:35px;
+height:20px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+cursor:pointer;
+pointer-events:auto;
+background:var(--theme);}
+
+.theme .thumb {
+position:absolute;
+left:2.5px;
+width:15px;
+height:15px;
+border-radius:7.5px;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+background:var(--secondary);
+box-shadow:-1px 1px 2px rgba(0,0,0,0.3);}
+
+.theme.active .thumb {
+left:17.5px;}
+
+.theme span {
+position:absolute;
+left:45px;
+font-size:0.7rem;
+color:var(--secondary);}
+
+.logo {
+overflow:hidden;
+transform:translateY(-20px);}
+
+.logo .wrapper {
+position:absolute;
+left:40px;
+width:100px;
+display:flex;}
+
+.logo span {
+position:relative;
+font-size:0.8rem;
+font-weight:600;}
+
+.logo span:nth-child(1) {
+color:var(--secondary);}
+
+.logo span:nth-child(2) {
+color:var(--color);}
+
+.logo img {
+position:absolute;
+left:0;}
+
+.search {
+transform:translateY(-10px);}
+
+.search svg {
+position:absolute;
+left:0;
+fill:var(--shadow);
+pointer-events:none;}
+
+.input::placeholder {
+position:absolute;
+top:50%;
+color:var(--shadow);
+font-weight:400;
+font-size:0.6rem;
+transform:translate(5px,-50%);}
+
+.input:focus::placeholder {
+color:transparent;}
+
+.input {
+position:absolute;
+left:0;
+width:100%;
+height:100%;
+transition:0.4s;
+font-weight:400;
+font-size:0.6rem;
+border-radius:15px;
+padding-left:30px;
+border:none;
+cursor:pointer;
+pointer-events:auto;
+color:var(--shadow);
+background:var(--search);
+caret-color:var(--shadow);
+outline:1px solid var(--shadow);}
+
+</style>
+
+<body>
+
+<div class="Body dark">
+
+<div class="main-container">
+
+<!-- SideNavbar -->
+
+<div class="side-navbar">
+
+
+<!-- Items -->
+
+<ul class="item-list">
+
+
+<!-- Logo -->
+
+<li class="item logo">
+
+ <section class="container">
+
+ <img src="Icons/Logo.svg">
+
+ <div class="wrapper">
+  <span>Trade</span>
+  <span>Flux</span>
+ </div>
+
+ </section>
+
+</li>
+
+
+<!-- Search -->
+
+<li class="item search">
+
+ <input class="input" placeholder="Search">
+
+ <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14.3135 8C15.1427 8.00004 15.9643 8.16317 16.7305 8.48047C17.4968 8.79791 18.1937 9.26397 18.7803 9.85059C19.3666 10.4371 19.832 11.1331 20.1494 11.8994C20.4669 12.6659 20.6309 13.4879 20.6309 14.3174C20.6308 15.1467 20.4668 15.9681 20.1494 16.7344C19.9415 17.2363 19.6691 17.708 19.3418 18.1387L21.7461 20.543C22.0794 20.8764 22.0794 21.4167 21.7461 21.75C21.4127 22.083 20.8723 22.0832 20.5391 21.75L18.1338 19.3447C17.041 20.1751 15.7014 20.6347 14.3135 20.6348C12.6384 20.6347 11.0313 19.9687 9.84668 18.7842C8.66215 17.5996 7.99623 15.9926 7.99609 14.3174C7.99609 12.6422 8.66218 11.0353 9.84668 9.85059C10.4332 9.26413 11.1293 8.79794 11.8955 8.48047C12.6619 8.16305 13.484 8.00005 14.3135 8ZM14.3135 9.70703C13.7083 9.70709 13.1081 9.82599 12.5488 10.0576C11.9897 10.2893 11.4817 10.6296 11.0537 11.0576C10.1894 11.9221 9.70312 13.095 9.70312 14.3174C9.70327 15.5398 10.1894 16.7128 11.0537 17.5771C11.9181 18.4414 13.0912 18.9266 14.3135 18.9268C15.5359 18.9267 16.7088 18.4414 17.5732 17.5771C18.0012 17.1493 18.3406 16.6402 18.5723 16.0811C18.8038 15.522 18.9228 14.9225 18.9229 14.3174C18.9229 13.712 18.8039 13.1121 18.5723 12.5527C18.3407 11.9937 18.0012 11.4857 17.5732 11.0576C17.1453 10.6297 16.6364 10.2893 16.0771 10.0576C15.5182 9.82615 14.9185 9.70707 14.3135 9.70703Z"/>
+ </svg>
+
+</li>
+
+</ul>
+
+
+<!-- Footer -->
+
+<footer>
+
+<div class="line"></div>
+
+</footer>
+
+
+<!-- Theme -->
+
+<section class="theme active">
+
+ <div class="theme-icon">
+  <img class="Light" src="Icons/light.svg">
+  <img class="Dark" src="Icons/dark.svg">
+ </div>
+
+ <span>Dark</span>
+
+ <section class="toggle">
+  <div class="thumb"></div>
+ </section>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="JS/SideMode.js"></script>
+
+</body>
+
+</html>
