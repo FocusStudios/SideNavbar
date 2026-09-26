@@ -1,4 +1,7 @@
 const Body = document.querySelector(".Body");
+const MainContainer = document.querySelector(".main-container");
+
+ MainContainer.style.top = `max(0px,calc((${window.innerHeight}px - (600px + 220px * (100vw - 360px) / 1200px)) / 2))`;
 
 
 // Create Main Frames & Subframes
