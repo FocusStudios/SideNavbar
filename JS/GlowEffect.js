@@ -1,13 +1,13 @@
 const Body = document.querySelector(".Body");
 const MainContainer = document.querySelector(".main-container");
 
-function resize() {
+function Resize() {
  
  MainContainer.style.top = `max(0px,calc((${window.innerHeight}px - (600px + 220px * (100vw - 360px) / 1200px)) / 2))`;
 
 }
 
-resize();
+Resize();
 
 window.addEventListener("resize",Resize);
 
