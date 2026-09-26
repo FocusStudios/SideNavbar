@@ -27,6 +27,8 @@ scroll-behavior:smooth;}
 
 body {
 margin:0;
+width:100vw;
+height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -48,8 +50,8 @@ pointer-events:none;}
 .Body {
 position:fixed;
 top:0;
-width:100vw;
-height:100vh;
+width:100%;
+height:100%;
 direction:rtl;
 display:flex;
 align-items:center;
@@ -163,11 +165,14 @@ border-radius:9px;
 cursor:pointer;
 pointer-events:auto;
 stroke:var(--Background); 
-background:rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.2);}
+
+.frame .back {
 box-shadow:1px 3px 6px rgba(0,0,0,0.15);}
 
 .Back {
-background:var(--hover);}
+stroke:var(--primary);
+background:var(--Hover);}
 
 .Cross {
 position:absolute;
