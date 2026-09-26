@@ -44,7 +44,7 @@ items.forEach((item,index) => {
 
     <li class="item">
 
-     <img class="square" src="Icons/Square.svg">
+     <img class="square" src="Icons/square.svg">
 
      <img class="icon" src="Icons/Icon${index + 1}.svg">
 
