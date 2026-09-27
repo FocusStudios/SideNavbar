@@ -58,10 +58,12 @@ justify-content:center;}
 position:relative;
 width:100%;
 height:calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3));
+z-index:2;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;}
+justify-content:center;
+pointer-events:none;}
 
 .Body.dark {
 --search:rgba(255,255,255,0.05);
@@ -128,7 +130,6 @@ display:flex;}
 position:absolute;
 width:50px;
 height:670px;
-z-index:2;
 display:flex;
 align-items:center;
 justify-content:center;
