@@ -170,19 +170,6 @@ if(Body.classList.contains("dark")){
 });
 
 
-document.addEventListener("click", (e) => {
-
- if (!SideNavbar.contains(e.target) && SideNavbar.classList.contains("active")) {
-      
-    SideNavbar.classList.remove("active");
-    SideNavbar.style.width="50px";
-    SideNavbar.querySelector(".theme-icon").style.left = "0";
-    Frames.forEach(Frame => {Frame.style.filter="brightness(100%)";});
-      
-  }
-
-}); 
-
 Search.addEventListener("click",() => {
 
 if(!SideNavbar.classList.contains("active")){
