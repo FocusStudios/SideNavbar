@@ -138,15 +138,6 @@ Items[index].classList.add("active");
 
 Frames.forEach(Frame => {Frame.classList.remove("active");});
 Frames[index].classList.add("active");
-
-setTimeout(() => {
-    
-SideNavbar.classList.remove("active");
-SideNavbar.style.width="50px";
-SideNavbar.querySelector(".theme-icon").style.left = "0";
-Frames.forEach(Frame => Frame.style.filter = "brightness(100%)");
-
-},400);
     
 });
 });
