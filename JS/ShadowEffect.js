@@ -369,13 +369,15 @@ MenuItem.classList.remove("active");});
 
 }
 
-Frames.forEach(Frame => {
-Frame.addEventListener("click",() => {
+document.addEventListener("click", (e) => {
 
-deactivate();
+ if (!SideNavbar.contains(e.target)) {
+      
+    deactivate();
+      
+  }
 
-});
-});
+});  
 
 
 //Click on each item-btn
