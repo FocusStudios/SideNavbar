@@ -2,13 +2,22 @@ const Body = document.querySelector(".Body");
 const MainContainer = document.querySelector(".main-container");
 
 function Resize() {
- 
- MainContainer.style.top = `max(0px,calc((${window.innerHeight}px - (600px + 220px * (100vw - 360px) / 1200px)) / 2))`;
+
+if(window.innerHeight < Body.offsetHeight){
+
+MainContainer.classList.remove("state1");
+MainContainer.classList.add("state2");
+
+}else{
+
+MainContainer.classList.remove("state2");
+MainContainer.classList.add("state1");
+
+}
 
 }
 
 Resize();
-
 window.addEventListener("resize",Resize);
 
 // Create Main Frames & Subframes
