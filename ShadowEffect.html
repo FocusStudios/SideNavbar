@@ -33,7 +33,8 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden;}
+overflow:hidden;
+background:linear-gradient(#FFB3D2,#FF99C3);}
 
 * {
 margin:0;
@@ -50,19 +51,17 @@ pointer-events:none;}
 
 .Body {
 position:fixed;
-top:0;
 width:100%;
 height:100%;
 overflow-x:hidden;
 display:flex;
 align-items:center;
-justify-content:center;
-background:linear-gradient(#FFB3D2,#FF99C3);}
+justify-content:center;}
 
 .main-container {
-position:absolute;
-width:100vw;
-height:calc(600px + 220px * (100vw - 360px) / 1200px);
+position:relative;
+width:100%;
+height:calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3));
 overflow:hidden;
 display:flex;
 align-items:center;
@@ -81,21 +80,19 @@ background:var(--Hover);
 box-shadow:4px 4.5px 12px rgba(217, 30, 98,0.3);}
 
 .content {
-position:absolute;
-top:0;
+position:relative;
 width:100%;
 height:2000px;
+overflow:hidden;
 display:none;
 align-items:center;
-justify-content:center;
-overflow:hidden;}
+justify-content:center;}
 
 .frame, .account-settings {
-position:absolute;
+position:fixed;
 width:100%;
 height:100%;
 display:none;
-overflow:hidden;
 align-items:center;
 justify-content:center;}
 
@@ -104,8 +101,9 @@ display:flex;}
 
 .account-settings {
 display:flex;
-left:100vw;
+left:100%;
 z-index:3;
+overflow-x:hidden;
 background:var(--Background);}
 
 .account-settings.active {
@@ -685,29 +683,23 @@ color:transparent;
 pointer-events:auto;
 transition:all 0.5s, opacity 0s;}
 
-.account-settings .fields li section .Line, .account-settings .fields li section .line {
+.account-settings .fields li section .line {
 position:absolute;
 bottom:0;
 width:100%;
 height:1.5px;
 display:flex;
-opacity:0.5;
 border-radius:1px;
-background:var(--primary);}
-
-.account-settings .fields li section.active .Line {
-display:none;}
-
-.account-settings .fields li section .line {
-width:1px;
-opacity:0;
-display:flex;
-transition:width 0.5s;
-box-shadow:0 2px 2px var(--text);}
+background:var(--text);}
 
 .account-settings .fields li section.active .line {
-width:100%;
-opacity:1;}
+background:var(--primary);
+box-shadow:0 0 3px var(--primary);
+animation:expand 0.5s forwards;}
+
+@keyframes expand {
+0%{width:1px;}
+100%{width:100%;}}
 
 .account-settings .fields li section svg {
 position:absolute;
@@ -768,13 +760,25 @@ box-shadow:-4px 4px 6px rgba(217, 30, 98,0.6);}
 color:var(--text);
 background:var(--primary);}
 
+@media screen and (max-height:670px) {
+
+.account-settings .content {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.account-settings .content {
+height:100%;}
+
+}
+
 </style>
 
 <body>
 
 <div class="Body">
-
-<div class="main-container">
 
 <!-- Account Settings -->
 
@@ -812,6 +816,7 @@ background:var(--primary);}
 
 </div>
 
+<div class="main-container">
 
 <!-- SideNavbar -->
 
