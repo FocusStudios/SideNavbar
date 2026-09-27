@@ -1,23 +1,5 @@
 const Body = document.querySelector(".Body");
-const MainContainer = document.querySelector(".main-container");
 
-function Resize() {
-
-if(Body.offsetHeight < MainContainer.offsetHeight){
-
-MainContainer.style.posititon = "absolute";
-MainContainer.style.top = "0";
-
-}else{
-
-MainContainer.style.posititon = "relative";
-
-}
-
-}
-
-Resize();
-window.addEventListener("resize",Resize);
 
 // Create Main Frames & Subframes
 
@@ -82,9 +64,7 @@ const Backs = document.querySelectorAll(".back");
 
 Frames[0].classList.add("active");
 
-
 const SideNavbar = document.querySelector(".side-navbar");
-
 
 // Create Items
 
@@ -282,7 +262,6 @@ fields.forEach(field => {
 
       <input class="input ${field.class}" type="${field.type}">
 
-      <div class="Line"></div>
       <div class="line"></div>
 
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +285,27 @@ const Search = document.querySelector(".side-navbar .input");
 const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
 const Sections = document.querySelectorAll(".account-settings .fields section");
+const MainContainer = document.querySelector(".main-container");
 
+function Resize() {
+
+    if (window.innerHeight < MainContainer.offsetHeight) {
+
+      MainContainer.style.position = "absolute";
+      MainContainer.style.top = "0";
+
+
+    } else {
+
+      MainContainer.style.position = "relative";
+    
+    }
+
+}
+
+Resize();
+
+window.addEventListener("resize", Resize);
 
 //Activate & Deactivate Side Navbar
 
