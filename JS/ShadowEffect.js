@@ -1,15 +1,4 @@
 const Body = document.querySelector(".Body");
-const MainContainer = document.querySelector(".main-container");
-
-function Resize() {
- 
- MainContainer.style.top = `max(0px,calc((${window.innerHeight}px - (600px + 220px * (100vw - 360px) / 1200px)) / 2))`;
-
-}
-
-Resize();
-
-window.addEventListener("resize",Resize);
 
 // Create Main Frames & Subframes
 
@@ -307,6 +296,28 @@ const Search = document.querySelector(".side-navbar .input");
 const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
 const Sections = document.querySelectorAll(".account-settings .fields section");
+
+const MainContainer = document.querySelector(".main-container");
+
+function Resize() {
+
+    if (window.innerHeight < MainContainer.offsetHeight) {
+
+      MainContainer.style.position = "absolute";
+      MainContainer.style.top = "0";
+
+
+    } else {
+
+      MainContainer.style.position = "relative";
+    
+    }
+
+}
+
+Resize();
+
+window.addEventListener("resize", Resize);
 
 
 //Activate & Deactivate Side Navbar
