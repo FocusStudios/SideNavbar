@@ -1,17 +1,5 @@
 const Body = document.querySelector(".Body"); 
 
-const MainContainer = document.querySelector(".main-container");
-
-function Resize() {
- 
- MainContainer.style.top = `max(0px,calc((${window.innerHeight}px - (600px + 220px * (100vw - 360px) / 1200px)) / 2))`;
-
-}
-
-Resize();
-
-window.addEventListener("resize",Resize);
-
 // Create Main Frames & Subframes
 
 const mainFrames = ["Dashboard", "Analysis", "Orders", "History", "Credit", "Notifications", "Settings", "Support", "Log Out"]
@@ -115,6 +103,28 @@ const Items = document.querySelectorAll(".item.N");
 const Theme = document.querySelector(".theme");
 const Search = document.querySelector(".search");
 const Toggle = document.querySelector(".theme .toggle");
+const MainContainer = document.querySelector(".main-container");
+
+function Resize() {
+
+    if (window.innerHeight < MainContainer.offsetHeight) {
+
+      MainContainer.style.position = "absolute";
+      MainContainer.style.top = "0";
+
+
+    } else {
+
+      MainContainer.style.position = "relative";
+    
+    }
+
+}
+
+Resize();
+
+window.addEventListener("resize", Resize);
+
 
 Items[0].classList.add("active");
 
