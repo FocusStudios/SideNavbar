@@ -295,7 +295,6 @@ const Search = document.querySelector(".side-navbar .input");
 const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
 const Sections = document.querySelectorAll(".account-settings .fields section");
-
 const MainContainer = document.querySelector(".main-container");
 
 function Resize() {
