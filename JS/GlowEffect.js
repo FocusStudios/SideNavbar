@@ -449,8 +449,6 @@ setTimeout(() => {
 
 },300);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
-
 });
 
 });
@@ -470,8 +468,6 @@ setTimeout(() => {
  Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 
 },300);
-
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
 
 });
 });
