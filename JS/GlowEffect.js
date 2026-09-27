@@ -366,6 +366,15 @@ deactivate();
 });
 });
 
+document.addEventListener("click", (e) => {
+
+ if (!SideNavbar.contains(e.target)) {
+      
+    deactivate();
+      
+  }
+
+});    
 
 //Click on each item-btn
 
