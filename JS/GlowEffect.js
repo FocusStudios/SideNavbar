@@ -3,15 +3,14 @@ const MainContainer = document.querySelector(".main-container");
 
 function Resize() {
 
-if(window.innerHeight < Body.offsetHeight){
+if(Body.offsetHeight < MainContainer.offsetHeight){
 
-MainContainer.classList.remove("state1");
-MainContainer.classList.add("state2");
+MainContainer.style.posititon = "absolute";
+MainContainer.style.top = "0";
 
 }else{
 
-MainContainer.classList.remove("state2");
-MainContainer.classList.add("state1");
+MainContainer.style.posititon = "relative";
 
 }
 
