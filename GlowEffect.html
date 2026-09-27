@@ -56,16 +56,11 @@ background:var(--Background);}
 .main-container {
 position:absolute;
 width:100%;
+height:calc(400px + 400px*(var(--i1) - var(--i2))/var(--i3));
 overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;}
-
-.main-container.state1 {
-height:100%;}
-
-.main-container.state2 {
-height:calc(400px + 400px*(var(--i1) - var(--i2))/var(--i3));}
 
 .slide {
 position:absolute;
@@ -811,7 +806,7 @@ box-shadow:0 3px 3px rgba(51, 255, 255,0.2);}
 
 <div class="Body">
 
-<div class="main-container state2">
+<div class="main-container">
 
 <!-- Account Settings -->
 
