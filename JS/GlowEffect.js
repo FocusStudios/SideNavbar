@@ -358,13 +358,6 @@ MenuItem.classList.remove("active");});
 
 }
 
-Frames.forEach(Frame => {
-Frame.addEventListener("click",() => {
-
-deactivate();
-
-});
-});
 
 document.addEventListener("click", (e) => {
 
