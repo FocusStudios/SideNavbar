@@ -16,6 +16,9 @@ html {
 scroll-behavior:smooth;}
 
 :root {
+--i1:100vw;
+--i2:360px;
+--i3:1200px;
 --primary:aqua;
 --secondary:#999FAD;
 --Background:#001835;
@@ -28,7 +31,8 @@ height:100vh;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;}
+justify-content:center;
+background:var(--Background);}
 
 * {
 margin:0;
@@ -44,19 +48,18 @@ img {
 pointer-events:none;}
 
 .Body {
-position:absolute;
+position:fixed;
 width:100%;
 height:100%;
 overflow-x:hidden;
 display:flex;
 align-items:center;
-justify-content:center;
-background:var(--Background);}
+justify-content:center;}
 
 .main-container {
 position:relative;
 width:100%;
-height:calc(400px + 400px*(var(--i1) - var(--i2))/var(--i3));
+height:calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3));
 overflow:hidden;
 display:flex;
 align-items:center;
@@ -86,10 +89,9 @@ align-items:center;
 justify-content:center;}
 
 .frame, .account-settings {
-position:absolute;
+position:fixed;
 width:100%;
 height:100%;
-overflow:hidden;
 display:none;
 align-items:center;
 justify-content:center;}
@@ -99,8 +101,9 @@ display:flex;}
 
 .account-settings {
 display:flex;
-left:100vw;
+left:100%;
 z-index:3;
+overflow-x:hidden;
 background:var(--Background);}
 
 .account-settings.active {
@@ -628,7 +631,8 @@ width:100%;
 height:100%;
 display:flex;
 align-items:center;
-justify-content:center;}
+justify-content:center;
+overflow-x:hidden;}
 
 .account-settings .content-container {
 position:relative;
@@ -716,7 +720,7 @@ color:transparent;
 pointer-events:auto;
 transition:all 0.5s, opacity 0s;}
 
-.account-settings .fields li section .Line, .account-settings .fields li section .line {
+.account-settings .fields li section .line {
 position:absolute;
 bottom:0;
 width:100%;
@@ -725,20 +729,14 @@ display:flex;
 border-radius:1px;
 background:var(--secondary);}
 
-.account-settings .fields li section.active .Line {
-display:none;}
-
-.account-settings .fields li section .line {
-width:1px;
-opacity:0;
-display:flex;
-transition:width 0.5s;
-background:var(--primary);
-box-shadow:0 0 3px var(--primary);}
-
 .account-settings .fields li section.active .line {
-width:100%;
-opacity:1;}
+background:var(--primary);
+box-shadow:0 0 3px var(--primary);
+animation:expand 0.5s forwards;}
+
+@keyframes expand {
+0%{width:1px;}
+100%{width:100%;}}
 
 .account-settings .fields li section svg {
 position:absolute;
@@ -800,13 +798,25 @@ color:var(--text);
 background:var(--primary);
 box-shadow:0 3px 3px rgba(51, 255, 255,0.2);}
 
+@media screen and (max-height:670px) {
+
+.account-settings .content {
+height:670px;}
+
+}
+
+@media screen and (min-height:670px) {
+
+.account-settings .content {
+height:100%;}
+
+}
+
 </style>
 
 <body>
 
 <div class="Body">
-
-<div class="main-container">
 
 <!-- Account Settings -->
 
@@ -844,6 +854,7 @@ box-shadow:0 3px 3px rgba(51, 255, 255,0.2);}
 
 </div>
 
+<div class="main-container">
 
 <!-- SideNavbar -->
 
