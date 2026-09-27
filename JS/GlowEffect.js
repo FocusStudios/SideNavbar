@@ -668,6 +668,8 @@ Save.classList.remove("active");
 AccountSettings.classList.remove("active");
 setTimeout(() => {AccountSettings.scrollTop = 0;},400);
 Frames.forEach(Frame => {Frame.style.overflowY="auto";});
+Body.style.overflowY="auto";
+
 },500);
 
 });
