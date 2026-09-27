@@ -460,6 +460,8 @@ setTimeout(() => {
 
 },300);
 
+setTimeout(() => {deactivate();},600);
+
 });
 
 });
@@ -480,6 +482,8 @@ setTimeout(() => {
 
 },300);
 
+setTimeout(() => {deactivate();},600);
+    
 });
 });
 
