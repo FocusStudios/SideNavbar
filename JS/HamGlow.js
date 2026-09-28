@@ -239,7 +239,6 @@ fields.forEach(field => {
 
       <input class="input ${field.class}" type="${field.type}">
 
-      <div class="Line"></div>
       <div class="line"></div>
 
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
