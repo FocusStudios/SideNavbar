@@ -659,7 +659,7 @@ color:transparent;
 pointer-events:auto;
 transition:all 0.5s, opacity 0s;}
 
-.account-settings .fields li section .Line, .account-settings .fields li section .line {
+.account-settings .fields li section .line {
 position:absolute;
 bottom:0;
 width:100%;
@@ -668,20 +668,14 @@ display:flex;
 border-radius:1px;
 background:var(--secondary);}
 
-.account-settings .fields li section.active .Line {
-display:none;}
-
-.account-settings .fields li section .line {
-width:1px;
-opacity:0;
-display:flex;
-transition:width 0.5s;
-background:var(--primary);
-box-shadow:0 0 3px var(--primary);}
-
 .account-settings .fields li section.active .line {
-width:100%;
-opacity:1;}
+background:var(--primary);
+box-shadow:0 0 3px var(--primary);
+animation:expand 0.5s forwards;}
+
+@keyframes expand {
+0%{width:1px;}
+100%{width:100%;}}
 
 .account-settings .fields li section svg {
 position:absolute;
