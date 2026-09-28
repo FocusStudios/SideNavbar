@@ -63,16 +63,8 @@ z-index:2;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;}
-
-.main-container .layer {
-position:absolute;
-width:100%;
-height:100%;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;}
+justify-content:center;
+pointer-events:none;}
 
 .Body.dark {
 --search:rgba(255,255,255,0.05);
@@ -124,14 +116,17 @@ justify-content:center;
 overflow:hidden;}
 
 .frame {
-position:fixed;
+position:absolute;
+top:0;
 width:100%;
-height:100%;
 overflow:hidden;
 display:none;
 align-items:center;
 justify-content:center;}
 
+.frame.active {
+display:flex;}
+    
 .side-navbar {
 position:absolute;
 width:50px;
@@ -373,8 +368,6 @@ outline:1px solid var(--shadow);}
 <div class="Body dark">
 
 <div class="main-container">
-
-<div class="layer"></div>
     
 <!-- SideNavbar -->
 
