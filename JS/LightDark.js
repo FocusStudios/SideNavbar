@@ -114,8 +114,8 @@ function Resize() {
 
     } else {
 
-      MainContainer.style.height = "100vh";
-      Frames.forEach(Frame => {Frame.style.height = "100vh";});
+      MainContainer.style.height = "100%";
+      Frames.forEach(Frame => {Frame.style.height = "100%";});
     
     }
 
