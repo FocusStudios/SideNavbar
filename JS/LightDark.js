@@ -1,4 +1,5 @@
 const Body = document.querySelector(".Body"); 
+const MainContainer = document.querySelector(".main-container");
 
 // Create Main Frames & Subframes
 
@@ -7,7 +8,7 @@ const mainFrames = ["Dashboard", "Analysis", "Orders", "History", "Credit", "Not
 
 mainFrames.forEach(mainFrame => {
 
-    Body.innerHTML += `
+    MainContainer.innerHTML += `
 
      <div class="frame">
 
@@ -29,6 +30,25 @@ const Frames = document.querySelectorAll(".frame");
 
 Frames[0].classList.add("active");
 
+function Resize() {
+
+    if (window.innerHeight < MainContainer.offsetHeight) {
+
+      MainContainer.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";
+      Frames.forEach(Frame => {Frame.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";});
+
+    } else {
+
+      MainContainer.style.height = "100%";
+      Frames.forEach(Frame => {Frame.style.height = "100%";});
+    
+    }
+
+}
+
+Resize();
+
+window.addEventListener("resize", Resize);
 
 const SideNavbar = document.querySelector(".side-navbar");
 
@@ -103,28 +123,6 @@ const Items = document.querySelectorAll(".item.N");
 const Theme = document.querySelector(".theme");
 const Search = document.querySelector(".search");
 const Toggle = document.querySelector(".theme .toggle");
-const MainContainer = document.querySelector(".main-container");
-
-function Resize() {
-
-    if (window.innerHeight < MainContainer.offsetHeight) {
-
-      MainContainer.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";
-      Frames.forEach(Frame => {Frame.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";});
-
-    } else {
-
-      MainContainer.style.height = "100%";
-      Frames.forEach(Frame => {Frame.style.height = "100%";});
-    
-    }
-
-}
-
-Resize();
-
-window.addEventListener("resize", Resize);
-
 
 Items[0].classList.add("active");
 
