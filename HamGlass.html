@@ -25,7 +25,10 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden;}
+overflow:hidden;
+background-size:cover;
+background-position:center;
+background-image:url("Media/Wallpaper.png");}
 
 * {
 margin:0;
@@ -49,9 +52,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow-x:hidden;
-overflow-y:hidden;
-background-size:cover;
-background-image:url("Media/Wallpaper.png");}
+overflow-y:hidden;}
 
 .slide {
 position:absolute;
@@ -175,11 +176,22 @@ fill:var(--primary);}
 
 .side-navbar {
 position:absolute;
-top:1px;
+top:0;
 left:-280px;
 width:260px;
 z-index:2;
 direction:ltr;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.side-navbar.active {
+left:0;}
+
+.navbar-container {
+position:absolute;
+width:100%;
+height:calc(100% - 3px);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -188,9 +200,6 @@ backdrop-filter:blur(10px);
 background:rgba(255,255,255,0.1);
 outline:1px solid rgba(255,255,255,0.2);
 box-shadow:2px 0 8px rgba(255,255,255,0.1);}
-
-.side-navbar.active {
-left:0;}
 
 .item-list {
 position:absolute;
@@ -650,6 +659,8 @@ height:100%;}
 
 <div class="side-navbar">
 
+<div class="navbar-container">
+
 <div class="search">
 
  <input class="input" placeholder="Search">
@@ -696,6 +707,8 @@ height:100%;}
  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M15.9971 8.5127C16.0373 8.52072 16.0771 8.53204 16.1152 8.54785C16.1916 8.5795 16.261 8.6263 16.3193 8.68457C16.3775 8.74294 16.4245 8.81237 16.4561 8.88867C16.4876 8.96502 16.5039 9.04733 16.5039 9.12988L16.4912 9.25293C16.4832 9.29312 16.4718 9.33306 16.4561 9.37109C16.4244 9.4473 16.3778 9.5168 16.3193 9.5752L13.3926 12.499L16.3193 15.4248C16.4372 15.5427 16.5036 15.7026 16.5039 15.8691C16.504 16.036 16.4372 16.1964 16.3193 16.3145C16.2015 16.4324 16.0418 16.4988 15.875 16.499C15.7082 16.4991 15.5478 16.4332 15.4297 16.3154L12.5029 13.3887L9.5791 16.3154C9.52069 16.3738 9.45033 16.4205 9.37402 16.4521C9.29792 16.4836 9.21617 16.4999 9.13379 16.5C8.96689 16.5 8.80654 16.4333 8.68848 16.3154C8.63022 16.2571 8.58342 16.1876 8.55176 16.1113C8.52012 16.0349 8.50393 15.9527 8.50391 15.8701C8.50391 15.7875 8.52008 15.7053 8.55176 15.6289C8.58342 15.5525 8.63018 15.4832 8.68848 15.4248L11.6133 12.499L8.68848 9.5752C8.57048 9.4572 8.50401 9.2967 8.50391 9.12988C8.50392 8.96291 8.57044 8.80268 8.68848 8.68457L8.78418 8.60547C8.88682 8.53711 9.00863 8.5 9.13379 8.5C9.30057 8.50013 9.46113 8.5666 9.5791 8.68457L12.5029 11.6094L15.4297 8.68457C15.4881 8.62624 15.5575 8.5794 15.6338 8.54785C15.7101 8.51631 15.7924 8.5 15.875 8.5L15.9971 8.5127Z"/>
  </svg>
+
+</div>
 
 </div>
 
