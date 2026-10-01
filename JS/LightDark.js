@@ -1,4 +1,5 @@
-const Body = document.querySelector(".Body"); 
+const Body = document.querySelector(".Body");
+const MainWrapper = document.querySelector(".main-wrapper");
 const MainContainer = document.querySelector(".main-container");
 
 // Create Main Frames & Subframes
@@ -8,7 +9,7 @@ const mainFrames = ["Dashboard", "Analysis", "Orders", "History", "Credit", "Not
 
 mainFrames.forEach(mainFrame => {
 
-    MainContainer.innerHTML += `
+    MainWrapper.innerHTML += `
 
      <div class="frame">
 
@@ -34,12 +35,12 @@ function Resize() {
 
     if (window.innerHeight < MainContainer.offsetHeight) {
 
-      MainContainer.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";
+      MainWrapper.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";
       Frames.forEach(Frame => {Frame.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";});
 
     } else {
 
-      MainContainer.style.height = "100%";
+      MainWrapper.style.height = "100%";
       Frames.forEach(Frame => {Frame.style.height = "100%";});
     
     }
