@@ -155,10 +155,17 @@ left:10px;}
 .side-navbar {
 position:absolute;
 top:0;
-left:-1px;
+left:0;
 width:70px;
 z-index:2;
-direction:ltr;
+display:flex;
+align-items:center;
+justify-content:center;}
+
+.navbar-container {
+position:absolute;
+width:70px;
+height:calc(100% - 3px);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -167,7 +174,7 @@ gap:30px;
 border-radius:0 10px 10px 0;
 backdrop-filter:blur(10px);
 background:rgba(255,255,255,0.1);
-border:1px solid rgba(255,255,255,0.2);
+outline:1px solid rgba(255,255,255,0.2);
 box-shadow:2px 0 8px rgba(255,255,255,0.1);}
 
 .item-list {
@@ -484,14 +491,14 @@ height:100%;}
 @media screen and (max-height:730px) {
 
 .side-navbar {
-height:728px;}
+height:730px;}
 
 }
 
 @media screen and (min-height:730px) {
 
 .side-navbar {
-height:calc(100% - 1px);}
+height:100%;}
 
 }
 
@@ -594,6 +601,8 @@ height:calc(100% - 1px);}
 
 <div class="side-navbar">
 
+<div class="navbar-container">
+
 <div class="search">
 
  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -616,6 +625,8 @@ height:calc(100% - 1px);}
   </div>
 
 </section>
+
+</div>
 
 </div>
 
