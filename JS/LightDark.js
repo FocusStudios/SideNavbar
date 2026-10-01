@@ -36,12 +36,10 @@ function Resize() {
     if (window.innerHeight < MainContainer.offsetHeight) {
 
       MainWrapper.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";
-      Frames.forEach(Frame => {Frame.style.height = "calc(600px + 200px*(var(--i1) - var(--i2))/var(--i3))";});
 
     } else {
 
       MainWrapper.style.height = "100%";
-      Frames.forEach(Frame => {Frame.style.height = "100%";});
     
     }
 
