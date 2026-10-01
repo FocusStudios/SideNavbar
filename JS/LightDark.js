@@ -1,6 +1,6 @@
 const Body = document.querySelector(".Body");
 const MainWrapper = document.querySelector(".main-wrapper");
-const MainContainer = document.querySelector(".main-container");
+
 
 // Create Main Frames & Subframes
 
@@ -27,6 +27,7 @@ mainFrames.forEach(mainFrame => {
 
 });
 
+const MainContainer = document.querySelector(".main-container");
 const Frames = document.querySelectorAll(".frame");
 
 Frames[0].classList.add("active");
