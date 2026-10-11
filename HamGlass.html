@@ -96,7 +96,7 @@ display:flex;}
 
 .account-settings {
 position:fixed;
-left:100vw;
+left:100%;
 z-index:3;
 display:flex;
 backdrop-filter:blur(10px);
@@ -552,20 +552,14 @@ width:360px;}
 
 @media screen and (max-height:670px) {
 
-.frame, .side-navbar {
-height:668px;}
-
-.account-settings .content {
+.frame, .side-navbar, .account-settings .content {
 height:670px;}
 
 }
 
 @media screen and (min-height:670px) {
 
-.frame, .side-navbar {
-height:calc(100% - 2px);}
-
-.account-settings .content {
+.frame, .side-navbar, .account-settings .content {
 height:100%;}
 
 }
