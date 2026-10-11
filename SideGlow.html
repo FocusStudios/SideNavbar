@@ -52,7 +52,8 @@ direction:rtl;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;}
+justify-content:center;
+background:var(--secondary);}
 
 .slide {
 position:absolute;
@@ -64,49 +65,44 @@ border-radius:20px;
 display:flex;
 align-items:center;
 justify-content:center;
-color:rgba(0,0,0,0.3);
-background-color:#fff;
-box-shadow:1px 4.5px 12px currentcolor;}
+background:#fff;
+box-shadow:1px 4.5px 12px rgba(0,0,0,0.3);}
 
 .content {
-position:relative;
+position:absolute;
 width:100%;
 height:2000px;
-overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;}
+justify-content:center;
+overflow:hidden;}
 
-.frame, .account-settings {
-position:fixed;
-bottom:0;
+.frame, .S, .account-settings {
+position:absolute;
+top:0;
 left:50px;
 width:calc(100% - 50px);
 height:100%;
 z-index:-1;
-direction:ltr;
 overflow-x:hidden;
 overflow-y:auto;
 display:none;
-justify-content:center;
-background:var(--secondary);}
-
-.frame.S, .account-settings {
-z-index:2;
-display:flex;
-left:calc(100vw + 50px);
-background:var(--Background);}
-
-.frame.S .slide, .account-settings .slide {
-opacity:10%;}
-
-.frame.S.active, .account-settings.active {
-left:0;
-width:100%;}
+direction:ltr;
+justify-content:center;}
 
 .frame.active {
-left:50px;
 display:flex;}
+
+.S, .account-settings {
+position:fixed;
+left:100vw;
+z-index:2;
+display:flex;
+background:var(--Background);}
+
+.S.active, .account-settings.active {
+left:0;
+width:100%;}
 
 .frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
 width:10px;}
