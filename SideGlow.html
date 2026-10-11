@@ -68,6 +68,9 @@ justify-content:center;
 background:#fff;
 box-shadow:1px 4.5px 12px rgba(0,0,0,0.3);}
 
+.slide h1 {
+opacity:0.5;}
+    
 .content {
 position:absolute;
 width:100%;
@@ -95,14 +98,14 @@ display:flex;}
 
 .S, .account-settings {
 position:fixed;
-left:100vw;
+left:100%;
+width:100%;
 z-index:2;
 display:flex;
 background:var(--Background);}
 
 .S.active, .account-settings.active {
-left:0;
-width:100%;}
+left:0;}
 
 .frame::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
 width:10px;}
@@ -815,12 +818,11 @@ width:360px;}
 .Body {
 overflow-y:auto;}
 
-.side-navbar {
-position:absolute;
+.frame, .side-navbar, .account-settings .content {
 height:670px;}
 
-.account-settings .content {
-height:670px;}
+.side-navbar {
+position:absolute;}
 
 }
 
@@ -829,15 +831,14 @@ height:670px;}
 .Body {
 overflow-y:hidden;}
 
-.side-navbar {
-position:fixed;
+.frame, .side-navbar, .account-settings .content {
 height:100%;}
 
-.account-settings .content {
-height:100%;}
+.side-navbar {
+position:fixed;}
 
 }
-
+    
 </style>
 
 <body>
