@@ -438,7 +438,7 @@ setTimeout(() => {
 
 },300);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},1000);
 
 });
 
@@ -460,7 +460,7 @@ setTimeout(() => {
 
 },300);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},1000);
 
 });
 });
@@ -549,7 +549,7 @@ Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 
 },500);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},1000);
 
 });
 
