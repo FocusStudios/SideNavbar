@@ -602,9 +602,6 @@ function endDrag() {
 
   }
 
-    Frames.forEach(Frame => {
-      Frame.style.filter = "brightness(70%)";
-    });
   }
 
 
