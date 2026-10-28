@@ -142,8 +142,6 @@ Items.forEach((Item,index) => {
 
   Item.classList.add("active");
 
-  setTimeout(() => {deactivate();},400);
-
  });
 
 });
