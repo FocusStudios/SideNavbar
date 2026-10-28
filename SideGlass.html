@@ -162,8 +162,6 @@ height:calc(100% - 3px);
 display:flex;
 align-items:center;
 justify-content:center;
-flex-direction:column;
-gap:30px;
 border-radius:0 10px 10px 0;
 backdrop-filter:blur(10px);
 background:rgba(255,255,255,0.1);
@@ -171,7 +169,7 @@ outline:1px solid rgba(255,255,255,0.2);
 box-shadow:2px 0 8px rgba(255,255,255,0.1);}
 
 .item-list {
-position:relative;
+position:absolute;
 width:40px;
 display:flex;
 align-items:center;
@@ -231,7 +229,8 @@ top:0;
 left:5px;}
 
 .account {
-position:relative;
+position:absolute;
+bottom:20px;
 width:40px;
 height:40px;
 display:flex;
@@ -267,7 +266,8 @@ border-radius:50%;
 background:#4abf02;}
 
 .side-navbar .search {
-position:relative;
+position:absolute;
+top:20px;
 width:40px;
 height:40px;
 border-radius:10px;
@@ -477,16 +477,6 @@ height:670px;}
 .account-settings .content, .side-navbar {
 height:100%;}
 
-}
-
-@media screen and (min-height:750px) {
-
-.account {
-margin-top:min(calc(40px * (100vh - 670px)/130px),60px);}
-
-.search {
-margin-bottom:min(calc(40px * (100vh - 670px)/130px),60px);}
-    
 }
 
 </style>
