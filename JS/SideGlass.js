@@ -62,11 +62,6 @@ const Items = document.querySelectorAll(".item");
 Items[0].classList.add("active");
 
 
-const Ham = document.querySelector(".Ham");
-const Cross = document.querySelector(".Cross");
-const AccountSettings = document.querySelector(".account-settings");
-
-
 // Create Fields of Account Settings
 
 const fields = [
