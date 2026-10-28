@@ -210,7 +210,7 @@ ItemMenus.forEach((ItemMenu,index) => {
 });
 
 
-const MenuItemAs = document.querySelectorAll(".menu-container .menu-item");
+const MenuItems = document.querySelectorAll(".menu-container .menu-item");
 
 const Ham = document.querySelector(".Ham");
 const Cross = document.querySelector(".Cross");
@@ -316,7 +316,7 @@ ItemMenu.classList.remove("active");});
 Frames.forEach(Frame => {
 Frame.style.filter="brightness(100%)";});
 
-MenuItemAs.forEach(MenuItem => {
+MenuItems.forEach(MenuItem => {
 MenuItem.classList.remove("active");});
 
 }
@@ -384,7 +384,7 @@ ItemMenu.querySelector(".item-btn").classList.remove("active");
 
 
 // Click on each menu-item of submenus
-MenuItemAs.forEach((MenuItem,index) => {
+MenuItems.forEach((MenuItem,index) => {
 MenuItem.addEventListener("click",() => {
 
 MenuItem.classList.add("active");
@@ -422,7 +422,7 @@ Settings.querySelector(".circle").classList.remove("active");
 AccountSettings.classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },500);
-setTimeout(() => {deactivate();},800);
+setTimeout(() => {deactivate();},1000);
 
 });
 
@@ -593,9 +593,6 @@ function endDrag() {
 
   }
 
-    Frames.forEach(Frame => {
-      Frame.style.filter = "brightness(70%)";
-    });
   }
 
 
