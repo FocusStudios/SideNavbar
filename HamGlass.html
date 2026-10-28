@@ -130,19 +130,6 @@ pointer-events:none;}
 .account-settings .Header {
 position:absolute;}
 
-.back {
-position:absolute;
-top:10px;
-left:10px;
-border-radius:9px;
-stroke:var(--primary);
-stroke-width:2;
-cursor:pointer;
-pointer-events:auto;
-outline:1px solid rgba(255,255,255,0.2);
-box-shadow:1px 4.5px 12px rgba(255,255,255,0.1);
-background:linear-gradient(to bottom right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.05) 75%);}
-
 .Ham {
 position:absolute;
 top:10px;
@@ -151,10 +138,9 @@ fill:var(--primary);
 cursor:pointer;
 pointer-events:auto;}
 
-.Cross {
+.Cross, .Back {
 position:absolute;
 top:10px;
-right:10px;
 width:25px;
 height:35px;
 border-radius:10px;
@@ -164,7 +150,13 @@ align-items:center;
 justify-content:center;
 outline:1px solid rgba(255,255,255,0.2);}
 
-.Cross svg {
+.Cross {
+right:10px;}
+
+.Back {
+left:10px;}
+
+.Cross svg, .Back svg {
 fill:var(--primary);}
 
 .side-navbar {
@@ -586,9 +578,15 @@ height:100%;}
 <div class="content">
 
 <header class="Header">
-  <svg class="back" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-   <path d="M17.0769 22.5L12 17.5L17.0769 12.5M12.7051 17.5H23" stroke-linecap="round" stroke-linejoin="round"/>
+    
+ <div class="Back">
+
+  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M14.3279 8.17629C14.4381 8.28919 14.5 8.4423 14.5 8.60194C14.5 8.76159 14.4381 8.9147 14.3279 9.0276L11.4184 12.0077L14.3279 14.9878C14.4316 15.1019 14.488 15.2527 14.4854 15.4086C14.4827 15.5644 14.4211 15.7131 14.3135 15.8234C14.206 15.9337 14.0608 15.997 13.9087 15.9999C13.7565 16.0028 13.6092 15.9452 13.4977 15.8391L10.1721 12.4338C10.0619 12.3209 10 12.1678 10 12.0081C10 11.8485 10.0619 11.6954 10.1721 11.5825L13.4967 8.17629C13.607 8.06341 13.7564 8 13.9123 8C14.0682 8 14.2177 8.06341 14.3279 8.17629Z"/>
   </svg>
+
+ </div>
+    
 </header>
 
 <div class="content-container">
