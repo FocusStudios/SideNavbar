@@ -95,7 +95,7 @@ fields.forEach((field, index) => {
 });
 
 
-const BackAS = document.querySelector(".back");
+const BackAS = document.querySelector(".Back");
 const Settings = document.querySelector(".settings");
 const Save = document.querySelector(".account-settings .save");
 const CamerInput = document.querySelector("#CamerInput");
@@ -191,7 +191,7 @@ setTimeout(() => {
 
 },400);
 
-setTimeout(() => {deactivate();Frames.forEach(Frame => {Frame.style.overflowY="hidden";});},800);
+setTimeout(() => {deactivate();Frames.forEach(Frame => {Frame.style.overflowY="hidden";});},1000);
 
 });
 
@@ -389,9 +389,6 @@ function endDrag() {
 
   }
 
-    Frames.forEach(Frame => {
-      Frame.style.filter = "brightness(70%)";
-    });
   }
 
 
