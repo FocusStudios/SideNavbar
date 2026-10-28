@@ -437,7 +437,7 @@ setTimeout(() => {
 
 },300);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},1000);
 
 });
 
@@ -459,7 +459,7 @@ setTimeout(() => {
 
 },300);
 
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";},1000);
 
 });
 });
@@ -515,7 +515,7 @@ Texts[index].style.display="none";
 
 Account.addEventListener("click",() => {
 setTimeout(() => {AccountSettings.classList.add("active");},400);
-setTimeout(() => {deactivate();Body.style.overflowY="hidden";Frames.forEach(Frame => {Frame.style.overflowY="hidden";});},800);
+setTimeout(() => {deactivate();Body.style.overflowY="hidden";Frames.forEach(Frame => {Frame.style.overflowY="hidden";});},1000);
 
 });
 
