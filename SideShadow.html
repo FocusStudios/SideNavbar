@@ -81,32 +81,32 @@ align-items:center;
 justify-content:center;
 overflow:hidden;}
 
-.frame, .account-settings {
-position:fixed;
+.frame, .S, .account-settings {
+position:absolute;
+top:0;
 left:50px;
 width:calc(100% - 50px);
 height:100%;
 z-index:-1;
-display:none;
-direction:ltr;
-background:#fff;
 overflow-x:hidden;
 overflow-y:auto;
-align-items:center;
+display:none;
+direction:ltr;
 justify-content:center;}
 
+.frame.active {
+display:flex;}
+
 .S, .account-settings {
+position:fixed;
 left:100%;
 width:100%;
 z-index:2;
 display:flex;
 background:var(--Background);}
 
-.frame.S.active, .account-settings.active {
+.S.active, .account-settings.active {
 left:0;}
-
-.frame.active {
-display:flex;}
 
 .frame h1, .account-settings h1 {
 color:var(--text);}
