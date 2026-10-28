@@ -89,7 +89,7 @@ fields.forEach((field, index) => {
 
 });
 
-
+const AccountSettings = document.querySelector(".account-settings");
 const BackAS = document.querySelector(".account-settings .back");
 const Settings = document.querySelector(".account");
 
