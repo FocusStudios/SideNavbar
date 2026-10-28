@@ -380,7 +380,7 @@ MenuItem.classList.add("active");
 setTimeout(() => {FrameSs[index].classList.add("active");
 Frames.forEach(Frame => {Frame.style.overflowY="hidden";});
 },300);
-setTimeout(() => {deactivate();},800);
+setTimeout(() => {deactivate();},1000);
 
 });
 });
