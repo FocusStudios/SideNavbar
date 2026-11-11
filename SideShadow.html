@@ -132,13 +132,15 @@ display:flex;}
 position:fixed;
 top:0;
 width:100%;
-height:35px;
+height:55px;
 pointer-events:none;}
 
 .back {
 position:absolute;
 top:10px;
 left:10px;
+width:35px;
+height:35px;
 border-radius:9px;
 cursor:pointer;
 pointer-events:auto;
@@ -251,7 +253,8 @@ background:var(--HoverX);}
 transform:rotate(180deg);}
 
 footer .item-btn.active {
-background:var(--footer);}
+background:var(--footer);
+box-shadow:0 5px 5px rgba(196, 2, 93,0.3);}
 
 .item .icon, .item .arrow {
 position:absolute;
@@ -583,8 +586,8 @@ align-items:center;
 justify-content:end;
 pointer-events:none;
 transition:0.3s ease-out;
-background:var(--Hover);
-box-shadow:-4px 4px 4px rgba(255,0,119,0.2);}
+background:linear-gradient(#FF99C4,#FC7AB0);
+box-shadow:-5px 5px 10px rgba(255,0,119,0.2);}
 
 .Menu.active {
 top:36px;
