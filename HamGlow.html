@@ -16,9 +16,9 @@ html {
 scroll-behavior:smooth;}
 
 :root {
---primary:aqua;
---secondary:#999FAD;
---Background:#001835;
+--primary:#00c8ff;
+--secondary:#98B9DC;
+--Background:#000E2D;
 --background:rgba(255,255,255,0.2);}
 
 body {
@@ -67,7 +67,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 background:#fff;
-box-shadow:1px 4.5px 12px rgba(0,0,0,0.3);}
+box-shadow:1px 5px 12px rgba(0,0,0,0.3);}
 
 .slide h1 {
 opacity:0.5;}
@@ -144,6 +144,8 @@ left:0;}
 position:absolute;
 top:10px;
 left:10px;
+width:35px;
+height:35px;
 cursor:pointer;
 pointer-events:auto;
 fill:var(--Background);}
@@ -152,6 +154,8 @@ fill:var(--Background);}
 position:absolute;
 top:10px;
 left:10px;
+width:35px;
+height:35px;
 border-radius:9px;
 cursor:pointer;
 pointer-events:auto;
@@ -163,6 +167,8 @@ box-shadow:1px 3px 6px rgba(0,0,0,0.1);}
 position:absolute;
 top:0;
 right:0;
+width:35px;
+height:35px;
 fill:#fff;
 cursor:pointer;}
 
@@ -301,8 +307,8 @@ left:10px;
 font-size:0.55rem;}
 
 .menu-item.active {
-background:rgba(51,255,255,0.1);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+background:rgba(0, 200, 255,0.1);
+box-shadow:0px 3px 3px rgba(0, 200, 255,0.2);}
 
 .item.menu.active {
 height:174px;}
@@ -405,9 +411,9 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-background:rgba(255,255,255,0.05);
-border:0.1px solid rgba(255,255,255,0.1);
-box-shadow:0 2px 4px rgba(51,255,255,0.1);}
+background:rgba(0, 153, 255,0.05);
+outline:0.1px solid rgba(0, 153, 255,0.1);
+box-shadow:0 2px 4px rgba(0, 153, 255,0.1);}
 
 .info-container {
 position:absolute;
@@ -549,8 +555,8 @@ font-weight:400;
 font-size:0.6rem;
 border-radius:7px;
 padding-left:30px;
-background:rgba(255,255,255,0.05);
-outline:1px solid rgba(255,255,255,0.2);}
+background:rgba(0, 153, 255,0.05);
+outline:1px solid rgba(0, 153, 255,0.2);}
 
 .account-settings .content {
 position:absolute;
@@ -596,7 +602,7 @@ cursor:pointer;
 pointer-events:auto;
 fill:var(--Background);
 background:var(--primary);
-box-shadow:0 2px 8px rgba(51, 255, 255,0.4);}
+box-shadow:0 2px 8px rgba(0, 200, 255,0.4);}
 
 .camera:active, .account-settings .save:active {
 transform:scale(0.8);}
@@ -709,9 +715,9 @@ cursor:pointer;
 pointer-events:none;
 font-size:0.8rem;
 color:var(--primary);
-background:rgba(51,255,255,0.1);
+background:rgba(0, 200, 255,0.1);
 text-shadow:0 0 3px var(--primary);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+box-shadow:0 3px 3px rgba(0, 200, 255,0.2);}
 
 .save.active {
 opacity:1;
@@ -719,8 +725,7 @@ pointer-events:auto;}
 
 .save.active:hover {
 color:var(--text);
-background:var(--primary);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+background:var(--primary);}
 
 @media screen and (max-width:400px) {
 
