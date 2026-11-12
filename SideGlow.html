@@ -16,9 +16,9 @@ html {
 scroll-behavior:smooth;}
 
 :root {
---primary:aqua;
---secondary:#999FAD;
---Background:#001835;
+--primary:#00E0FF;
+--secondary:#98B9DC;
+--Background:#000E2D;
 --background:rgba(255,255,255,0.2);}
 
 body {
@@ -60,16 +60,22 @@ position:absolute;
 top:500px;
 height:70vh;
 width:80vw;
-opacity:10%;
 border-radius:20px;
 display:flex;
 align-items:center;
 justify-content:center;
-background:#fff;
-box-shadow:1px 4.5px 12px rgba(0,0,0,0.3);}
+background:var(--Background);
+box-shadow:1px 5px 12px rgba(0,0,0,0.3);}
 
 .slide h1 {
-opacity:0.5;}
+color:#fff;}
+
+.S .slide {
+opacity:20%;
+background:#fff;}
+    
+.S .slide h1 {
+color:#000;}
     
 .content {
 position:absolute;
@@ -134,11 +140,13 @@ height:55px;}
 position:absolute;
 top:10px;
 left:10px;
+width:35px;
+height:35px;
 border-radius:9px;
 cursor:pointer;
 stroke:#fff;
 background:rgba(255,255,255,0.1);
-box-shadow:1px 4.5px 12px rgba(0,0,0,0.1);}
+box-shadow:1px 5px 12px rgba(0,0,0,0.1);}
 
 .side-navbar {
 top:0;
@@ -248,7 +256,7 @@ white-space:nowrap;
 font-size:0.5rem;
 color:var(--secondary);
 background:var(--Background);
-box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+box-shadow:0 5px 5px rgba(0,224,255,0.1);}
 
 .item .icon, .item .arrow {
 position:absolute;
@@ -307,8 +315,8 @@ left:10px;
 font-size:0.55rem;}
 
 .menu-item.active {
-background:rgba(51,255,255,0.1);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+background:rgba(0,224,255,0.1);
+box-shadow:0px 3px 3px rgba(0, 224, 255,0.2);}
 
 .item.menu.active {
 height:174px;}
@@ -430,9 +438,9 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-background:rgba(255,255,255,0.05);
-outline:0.1px solid rgba(255,255,255,0.1);
-box-shadow:0 2px 4px rgba(51,255,255,0.1);}
+background:rgba(0, 153, 255,0.05);
+outline:0.1px solid rgba(0, 153, 255,0.1);
+box-shadow:0 2px 4px rgba(0, 153, 255,0.1);}
 
 .info-container {
 position:absolute;
@@ -557,8 +565,8 @@ position:absolute;
 top:50%;
 font-weight:400;
 font-size:0.6rem;
-transform:translateY(-50%);
-color:rgba(255,255,255,0.7);}
+transform:translate(10%,-50%);
+color:rgba(152, 185, 220, 0.5);}
 
 .input:focus::placeholder {
 color:transparent;}
@@ -577,8 +585,8 @@ font-weight:400;
 font-size:0.6rem;
 border-radius:7px;
 padding-left:30px;
-background:rgba(255,255,255,0.05);
-outline:1px solid rgba(255,255,255,0.2);}
+background:rgba(0, 153, 255,0.05);
+outline:1px solid rgba(0, 153, 255,0.2);}
 
 .Arrow {
 position:absolute;
@@ -590,7 +598,7 @@ cursor:pointer;
 fill:var(--primary);
 border-radius:12.5px;
 background:var(--Background);
-box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+box-shadow:0 2px 3px rgba(0,224,255,0.8);}
 
 .side-navbar.active .input {
 width:200px;}
@@ -614,7 +622,7 @@ justify-content:end;
 pointer-events:none;
 transition:0.3s ease-out;
 background:var(--Background);
-box-shadow:-4px 4px 4px rgba(51,255,255,0.1);}
+box-shadow:0 1px 5px rgba(0,224,255,0.8);}
 
 .Menu.active {
 top:36px;
@@ -673,7 +681,7 @@ cursor:pointer;
 pointer-events:auto;
 fill:var(--Background);
 background:var(--primary);
-box-shadow:0 2px 8px rgba(51, 255, 255,0.4);}
+box-shadow:0 2px 8px rgba(0, 224, 255,0.4);}
 
 .camera:active, .account-settings .save:active {
 transform:scale(0.8);}
@@ -788,7 +796,7 @@ font-size:0.8rem;
 color:var(--primary);
 background:rgba(51,255,255,0.1);
 text-shadow:0 0 3px var(--primary);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+box-shadow:0 3px 3px rgba(0, 224, 255,0.2);}
 
 .save.active {
 opacity:1;
@@ -796,8 +804,7 @@ pointer-events:auto;}
 
 .save.active:hover {
 color:var(--text);
-background:var(--primary);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+background:var(--primary);}
 
 @media screen and (max-width:400px) {
 
@@ -924,7 +931,7 @@ position:fixed;}
 
 <li class="item search">
  <input class="input" placeholder="Search">
- <img src="Icons/search.svg">
+ <img src="Icons/search-glow.svg">
 </li>
 
 </ul>
