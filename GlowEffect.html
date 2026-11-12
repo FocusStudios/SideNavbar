@@ -19,9 +19,9 @@ scroll-behavior:smooth;}
 --i1:100vw;
 --i2:360px;
 --i3:1200px;
---primary:aqua;
---secondary:#999FAD;
---Background:#001835;
+--primary:#00E0FF;
+--secondary:#98B9DC;
+--Background:#000E2D;
 --background:rgba(255,255,255,0.2);}
 
 body {
@@ -121,11 +121,13 @@ display:none;}
 position:absolute;
 top:10px;
 left:10px;
+width:35px;
+height:35px;
 border-radius:9px;
 cursor:pointer;
 stroke:#fff;
 background:rgba(255,255,255,0.1);
-box-shadow:1px 4.5px 12px rgba(0,0,0,0.1);}
+box-shadow:1px 5px 12px rgba(0,0,0,0.1);}
 
 .side-navbar {
 position:absolute;
@@ -138,15 +140,16 @@ justify-content:center;
 transform:scale(calc(0.8 + 0.3*(100vw - 360px)/1200px));
 border-radius:8px;
 background:var(--Background);
-box-shadow:0 0 5px rgba(51,255,255,0.4);}
+outline:0.5px solid var(--primary);
+box-shadow:0 0 5px rgba(0,224,255,0.8);}
 
 .side-navbar.active {
 width:220px;}
 
 .dots {
 position:absolute;
-top:0;
-left:0;
+top:2px;
+left:2px;
 width:21px;
 height:5px;
 margin:6px;
@@ -239,7 +242,7 @@ white-space:nowrap;
 font-size:0.5rem;
 color:var(--secondary);
 background:var(--Background);
-box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+box-shadow:0 5px 5px rgba(0, 224, 255,0.1);}
 
 .item .icon, .item .arrow {
 position:absolute;
@@ -298,8 +301,8 @@ left:10px;
 font-size:0.55rem;}
 
 .menu-item.active {
-background:rgba(51,255,255,0.1);
-box-shadow:0px 3px 3px rgba(51, 255, 255,0.2);}
+background:rgba(0, 224, 255,0.1);
+box-shadow:0px 3px 3px rgba(0, 224, 255,0.2);}
 
 .item.menu.active {
 height:174px;}
@@ -421,9 +424,9 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-background:rgba(255,255,255,0.05);
-outline:0.1px solid rgba(255,255,255,0.1);
-box-shadow:0 2px 4px rgba(51,255,255,0.1);}
+background:rgba(0, 153, 255,0.05);
+outline:0.1px solid rgba(0, 153, 255,0.1);
+box-shadow:0 2px 4px rgba(0, 153, 255,0.1);}
 
 .info-container {
 position:absolute;
@@ -548,8 +551,8 @@ position:absolute;
 top:50%;
 font-weight:400;
 font-size:0.6rem;
-transform:translateY(-50%);
-color:rgba(255,255,255,0.7);}
+transform:translate(10%,-50%);
+color:rgba(152, 185, 220, 0.5);}
 
 .input:focus::placeholder {
 color:transparent;}
@@ -568,8 +571,8 @@ font-weight:400;
 font-size:0.6rem;
 border-radius:7px;
 padding-left:30px;
-background:rgba(255,255,255,0.05);
-outline:1px solid rgba(255,255,255,0.2);}
+background:rgba(0, 153, 255,0.05);
+outline:1px solid rgba(0, 153, 255,0.2);}
 
 .Arrow {
 position:absolute;
@@ -581,7 +584,7 @@ cursor:pointer;
 pointer-events:auto;
 border-radius:12.5px;
 background:var(--Background);
-box-shadow:0 5px 5px rgba(51,255,255,0.1);}
+box-shadow:0 2px 3px rgba(0,224,255,0.8);}
 
 .Arrow svg {
 fill:var(--primary);}
@@ -608,7 +611,7 @@ justify-content:end;
 pointer-events:none;
 transition:0.3s ease-out;
 background:var(--Background);
-box-shadow:0 1px 4px rgba(51,255,255,0.3);}
+box-shadow:0 1px 5px rgba(0,224,255,0.8);}
 
 .Menu.active {
 top:36px;
@@ -897,7 +900,7 @@ height:100%;}
 
 <li class="item search">
  <input class="input" placeholder="Search">
- <img src="Icons/search.svg">
+ <img src="Icons/search-glow.svg">
 </li>
 
 </ul>
