@@ -126,7 +126,7 @@ Ham.addEventListener("click",() => {
 
 SideNavbar.classList.add("active");
 Body.style.overflowY = "auto";
-SideNavbar.style.left="-1px";
+SideNavbar.style.left="0";
 
 Frames.forEach(Frame => {
 Frame.style.filter="brightness(70%)";});
@@ -258,7 +258,7 @@ function endDrag() {
   
     SideNavbar.classList.add("active");
     Body.style.overflowY = "auto";
-    SideNavbar.style.left="-1px";
+    SideNavbar.style.left="0";
 
   }
 
