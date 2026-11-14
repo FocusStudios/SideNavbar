@@ -126,7 +126,7 @@ Ham.addEventListener("click",() => {
 
 SideNavbar.classList.add("active");
 Body.style.overflowY = "auto";
-SideNavbar.style.left="0";
+SideNavbar.style.left="-1px";
 
 Frames.forEach(Frame => {
 Frame.style.filter="brightness(70%)";});
@@ -138,7 +138,7 @@ function deactivate() {
 
 SideNavbar.classList.remove("active");
 Body.style.overflowY = "hidden";
-SideNavbar.style.left="-220px";
+SideNavbar.style.left="-230px";
 
 Frames.forEach(Frame => {
 Frame.style.filter="brightness(100%)";});
@@ -238,7 +238,7 @@ function dragMove(clientX, clientY) {
   SideNavbar.style.left = `${newLeft}px`;
 
   Frames.forEach(Frame => {
-    Frame.style.filter = `brightness(${(0.7 + 0.3 * (Math.abs(newLeft) / 220)) * 100}%)`;
+    Frame.style.filter = `brightness(${(0.7 + 0.3 * (Math.abs(newLeft) / 230)) * 100}%)`;
   });
 }
 
@@ -258,7 +258,7 @@ function endDrag() {
   
     SideNavbar.classList.add("active");
     Body.style.overflowY = "auto";
-    SideNavbar.style.left="0";
+    SideNavbar.style.left="-1px";
 
   }
 
