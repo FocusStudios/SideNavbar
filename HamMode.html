@@ -154,8 +154,7 @@ width:35px;
 height:35px;
 cursor:pointer;
 pointer-events:auto;
-fill:var(--background);
-filter:drop-shadow(0 0 1px rgba(0,0,0,0.3));}
+fill:var(--secondary);}
 
 .Cross {
 position:absolute;
@@ -169,7 +168,7 @@ cursor:pointer;}
 .side-navbar {
 position:absolute;
 top:0;
-left:-220px;
+left:-230px;
 width:220px;
 height:100%;
 display:flex;
@@ -181,10 +180,10 @@ transition:all 0.2s, left 0.4s;
 border-radius:0 35px 35px 0;
 box-shadow:var(--Shadow);
 background:var(--background);
-outline:0.5px solid var(--outline);}
+border:0.5px solid var(--outline);}
 
 .side-navbar.active {
-left:0;}
+left:-1px;}
 
 .item-list {
 position:absolute;
